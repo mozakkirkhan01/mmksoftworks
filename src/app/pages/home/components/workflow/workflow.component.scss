@@ -1,0 +1,105 @@
+.workflow-section {
+  background-color: #030c15;
+  position: relative;
+}
+
+.workflow-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+
+  .eyebrow {
+    justify-content: center;
+  }
+}
+
+.brand-phrase-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 40px;
+  background: rgba(25, 211, 255, 0.08);
+  border: 1px solid rgba(25, 211, 255, 0.25);
+  margin-top: 1.5rem;
+
+  .step-text {
+    font-family: var(--font-code);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+    color: var(--mmk-white);
+
+    &.highlight {
+      color: var(--mmk-cyan);
+    }
+  }
+
+  .arrow-text {
+    color: var(--mmk-teal);
+    font-weight: 700;
+  }
+}
+
+.timeline-container {
+  position: relative;
+  padding-top: 20px;
+}
+
+.connecting-line-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  pointer-events: none;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stage-card {
+  padding: 1.75rem 1.25rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .stage-num-badge {
+    font-family: var(--font-code);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--mmk-cyan);
+    margin-bottom: 0.75rem;
+  }
+
+  .stage-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--mmk-white);
+    margin-bottom: 0.75rem;
+  }
+
+  .stage-desc {
+    font-size: 0.85rem;
+    color: var(--mmk-muted-light);
+    line-height: 1.5;
+  }
+}

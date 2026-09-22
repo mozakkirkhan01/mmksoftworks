@@ -1,0 +1,108 @@
+<section #heroRef class="hero-section" (mousemove)="onMouseMove($event)">
+  <div class="hero-bg-glow"></div>
+  <div class="mmk-container hero-grid">
+    <!-- Left / Center Content -->
+    <div class="hero-content">
+      <div class="eyebrow hero-reveal">
+        CUSTOM SOFTWARE • ERP • AUTOMATION
+      </div>
+      
+      <h1 class="hero-title hero-reveal">
+        Building Smart Software <br>
+        <span class="brand-gradient-text">for Growing Businesses.</span>
+      </h1>
+
+      <p class="hero-description hero-reveal">
+        MMK Softworks builds custom ERP systems, business automation solutions, and modern web applications designed around the way your business actually works.
+      </p>
+
+      <div class="hero-actions hero-reveal">
+        <button (click)="scrollToSolutions()" class="btn-hero btn-secondary">
+          Explore Solutions
+        </button>
+        <button (click)="scrollToContact()" class="btn-hero btn-primary">
+          <span>Start a Project</span>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+
+      <div class="hero-pills hero-reveal">
+        <span class="pill"><span class="dot"></span> Custom ERP</span>
+        <span class="pill"><span class="dot"></span> Business Automation</span>
+        <span class="pill"><span class="dot"></span> Web Applications</span>
+      </div>
+    </div>
+
+    <!-- Right Animated Software Ecosystem Visual -->
+    <div class="hero-visual-wrapper">
+      <div class="ecosystem-visual">
+        <svg class="connections-svg" viewBox="-400 -300 800 600">
+          <defs>
+            <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#168BFF" stop-opacity="0.8"/>
+              <stop offset="50%" stop-color="#19D3FF" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#20D6B5" stop-opacity="0.8"/>
+            </linearGradient>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- SVG Connecting Paths to surrounding nodes -->
+          <g class="paths-group">
+            <path *ngFor="let node of nodes" 
+                  [attr.d]="'M 0 0 L ' + node.x + ' ' + node.y" 
+                  class="connection-path" 
+                  stroke="url(#lineGrad)" 
+                  stroke-width="2" 
+                  fill="none" />
+          </g>
+
+          <!-- Moving Data Particles along paths -->
+          <g class="particles-group">
+            <circle *ngFor="let node of nodes; let i = index" 
+                    [attr.cx]="node.x * 0.4" 
+                    [attr.cy]="node.y * 0.4" 
+                    r="4" 
+                    fill="#19D3FF" 
+                    filter="url(#glow)"
+                    class="particle">
+              <animateTransform attributeName="transform" type="translate" 
+                [attr.from]="'0 0'" 
+                [attr.to]="node.x * 0.6 + ' ' + node.y * 0.6" 
+                [attr.dur]="(2.5 + i * 0.4) + 's'" 
+                repeatCount="indefinite" />
+            </circle>
+          </g>
+        </svg>
+
+        <!-- Center Node -->
+        <div class="node center-node">
+          <div class="node-inner">
+            <img src="assets/logo.png" alt="MMK Softworks Logo" class="center-logo" />
+            <span class="node-title">MMK</span>
+            <span class="node-sub">SOFTWORKS</span>
+          </div>
+          <div class="pulse-ring"></div>
+        </div>
+
+        <!-- Surrounding Nodes -->
+        <div *ngFor="let node of nodes" 
+             class="node erp-node" 
+             [style.transform]="'translate(' + node.x + 'px, ' + node.y + 'px)'">
+          <div class="node-box">
+            <span class="node-icon-dot"></span>
+            <span class="node-label">{{ node.title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator" (click)="scrollToSolutions()">
+    <span class="scroll-text">SCROLL TO EXPLORE</span>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>

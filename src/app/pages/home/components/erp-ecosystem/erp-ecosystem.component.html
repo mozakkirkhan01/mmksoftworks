@@ -1,0 +1,84 @@
+<section #stickySection id="solutions-story" class="mmk-section erp-sticky-section">
+  <div class="mmk-container">
+    <div class="section-intro">
+      <span class="eyebrow">OUR SOLUTIONS ECOSYSTEM</span>
+      <h2 class="section-title">
+        Software built around <br>
+        <span class="brand-gradient-text">your business processes.</span>
+      </h2>
+      <p class="section-subtitle">
+        Every organization operates differently. MMK Softworks builds tailored ERP platforms around your workflows rather than forcing your business into generic software.
+      </p>
+    </div>
+
+    <div class="sticky-grid">
+      <!-- Left Side Scroll Trigger Blocks -->
+      <div class="left-scroll-col">
+        <div *ngFor="let sol of solutions; let i = index" 
+             class="solution-scroll-trigger" 
+             [class.active]="activeIndex() === i"
+             (click)="setActiveIndex(i)">
+          <div class="solution-card-header">
+            <span class="sol-badge">{{ sol.category }}</span>
+            <h3 class="sol-title">{{ sol.title }}</h3>
+            <p class="sol-desc">{{ sol.shortDescription }}</p>
+          </div>
+
+          <div class="features-list">
+            <div *ngFor="let feat of sol.features" class="feat-item">
+              <svg class="feat-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>{{ feat.title }}:</strong> {{ feat.description }}</span>
+            </div>
+          </div>
+
+          <div class="sol-actions">
+            <a [routerLink]="['/solutions', sol.slug]" class="sol-link">
+              Explore {{ sol.title }} Details →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side Sticky Interactive Visual Panel -->
+      <div class="right-sticky-col">
+        <div class="sticky-visual-box mmk-glass-card">
+          <div class="visual-header">
+            <div class="status-indicator">
+              <span class="live-dot"></span>
+              <span class="live-text">ECOSYSTEM ACTIVE: {{ solutions[activeIndex()].title }}</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Nodes Diagram -->
+          <div class="visual-diagram">
+            <div class="center-hub">
+              <img src="assets/logo.png" alt="MMK Hub" class="hub-logo" />
+              <span>MMK ENGINE</span>
+            </div>
+
+            <div class="radial-nodes">
+              <div *ngFor="let sol of solutions; let i = index" 
+                   class="radial-node-item" 
+                   [class.active-node]="activeIndex() === i">
+                <div class="node-ring"></div>
+                <span class="node-name">{{ sol.title }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Solution Highlights Box -->
+          <div class="active-highlights-box">
+            <h4>{{ solutions[activeIndex()].subtitle }}</h4>
+            <div class="benefits-pills">
+              <span *ngFor="let b of solutions[activeIndex()].benefits" class="b-pill">
+                ✓ {{ b }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

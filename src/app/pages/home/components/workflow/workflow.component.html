@@ -1,0 +1,39 @@
+<section #workflowRef class="mmk-section workflow-section">
+  <div class="mmk-container">
+    <div class="workflow-header">
+      <span class="eyebrow">OUR METHODOLOGY</span>
+      <h2 class="section-title">
+        From idea <span class="gradient-text">to impact.</span>
+      </h2>
+      <div class="brand-phrase-banner">
+        <span class="step-text">IDEAS</span>
+        <span class="arrow-text">→</span>
+        <span class="step-text">CODE</span>
+        <span class="arrow-text">→</span>
+        <span class="step-text highlight">IMPACT</span>
+      </div>
+    </div>
+
+    <!-- Connecting Timeline Line -->
+    <div class="timeline-container">
+      <svg class="connecting-line-svg" viewBox="0 0 1200 4" fill="none">
+        <path d="M 0 2 L 1200 2" stroke="url(#workflowGrad)" stroke-width="3" stroke-dasharray="1200" stroke-dashoffset="0"/>
+        <defs>
+          <linearGradient id="workflowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#168BFF"/>
+            <stop offset="50%" stop-color="#19D3FF"/>
+            <stop offset="100%" stop-color="#20D6B5"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div class="stages-grid">
+        <div *ngFor="let st of stages; let i = index" class="stage-card mmk-glass-card">
+          <div class="stage-num-badge">{{ st.num }}</div>
+          <h3 class="stage-title">{{ st.title }}</h3>
+          <p class="stage-desc">{{ st.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

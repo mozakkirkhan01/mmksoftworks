@@ -1,0 +1,70 @@
+<section class="mmk-section projects-section">
+  <div class="mmk-container">
+    <div class="proj-header text-center">
+      <span class="eyebrow">PORTFOLIO & CASE STUDIES</span>
+      <h2 class="section-title">
+        Software we've <span class="gradient-text">engineered.</span>
+      </h2>
+      <p class="section-subtitle">
+        Explore purpose-built platforms deployed across travel operations, healthcare clinics, schools, and financial credit unions.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+      <div *ngFor="let proj of projects" class="project-mockup-card mmk-glass-card">
+        <!-- Browser Window UI Header -->
+        <div class="browser-header">
+          <div class="dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="browser-address">https://system.mmksoftworks.com/{{ proj.slug }}</div>
+        </div>
+
+        <!-- Dashboard UI Mockup Visual Area -->
+        <div class="mockup-content-area" [style.background]="proj.imagePlaceholderBg">
+          <div class="dashboard-preview-ui">
+            <div class="preview-sidebar">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+            <div class="preview-main">
+              <div class="header-bar">
+                <span class="tag-chip">{{ proj.category }}</span>
+              </div>
+              <div class="stats-row">
+                <div class="stat-box"></div>
+                <div class="stat-box"></div>
+                <div class="stat-box"></div>
+              </div>
+              <div class="table-rows">
+                <div class="t-row"></div>
+                <div class="t-row"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Meta Content -->
+        <div class="project-details-body">
+          <span class="client-tag">{{ proj.clientIndustry }}</span>
+          <h3 class="proj-title">{{ proj.title }}</h3>
+          <p class="proj-summary">{{ proj.summary }}</p>
+
+          <div class="features-chips">
+            <span *ngFor="let f of proj.features.slice(0, 3)" class="chip">{{ f }}</span>
+          </div>
+
+          <div class="card-footer-link">
+            <a [routerLink]="['/projects', proj.slug]" class="view-btn">
+              <span>View Case Study</span>
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

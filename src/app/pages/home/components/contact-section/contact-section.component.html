@@ -1,0 +1,102 @@
+<section id="contact-section" class="mmk-section contact-section">
+  <div class="mmk-container">
+    <div class="contact-grid">
+      <!-- Left Side Contact Info -->
+      <div class="contact-info-col">
+        <span class="eyebrow">START A CONVERSATION</span>
+        <h2 class="section-title">
+          Let's build <br>
+          <span class="brand-gradient-text">something better together.</span>
+        </h2>
+        <p class="section-subtitle">
+          Share your operational challenges with us. Our software architect team will evaluate your processes and provide a solution roadmap.
+        </p>
+
+        <div class="company-card mmk-glass-card">
+          <h3 class="company-name">MMK Softworks</h3>
+          <p class="tagline">Building Smart Software for Growing Businesses.</p>
+
+          <div class="info-group">
+            <div class="info-label">PHONE NUMBERS</div>
+            <a href="tel:8804791446" class="info-val">+91 88047 91446</a>
+            <a href="tel:7277189618" class="info-val">+91 72771 89618</a>
+          </div>
+
+          <div class="info-group">
+            <div class="info-label">EMAIL ADDRESS</div>
+            <a href="mailto:mmksoftworks@gmail.com" class="info-val">mmksoftworks&#64;gmail.com</a>
+          </div>
+
+          <div class="info-group">
+            <div class="info-label">TAGLINE / ETHOS</div>
+            <span class="info-val highlight">Ideas → Code → Impact</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side Reactive Contact Form -->
+      <div class="contact-form-col">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-card mmk-glass-card">
+          <div *ngIf="submitSuccessMessage()" class="alert-success">
+            ✓ {{ submitSuccessMessage() }}
+          </div>
+
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input id="fullName" type="text" formControlName="fullName" placeholder="Enter your full name" [class.invalid]="contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.touched">
+            <span *ngIf="contactForm.get('fullName')?.invalid && contactForm.get('fullName')?.touched" class="err-text">
+              Full name is required.
+            </span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="companyName">Company Name</label>
+              <input id="companyName" type="text" formControlName="companyName" placeholder="Your business/organization">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input id="phone" type="tel" formControlName="phone" placeholder="+91 98765 43210" [class.invalid]="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
+              <span *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched" class="err-text">
+                Valid phone number is required.
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input id="email" type="email" formControlName="email" placeholder="you@company.com" [class.invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+            <span *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="err-text">
+              Valid email address is required.
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="interest">I am interested in *</label>
+            <select id="interest" formControlName="interest" [class.invalid]="contactForm.get('interest')?.invalid && contactForm.get('interest')?.touched">
+              <option value="" disabled>Select your solution requirement</option>
+              <option *ngFor="let opt of interests" [value]="opt">{{ opt }}</option>
+            </select>
+            <span *ngIf="contactForm.get('interest')?.invalid && contactForm.get('interest')?.touched" class="err-text">
+              Please select an interest.
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Project Description *</label>
+            <textarea id="message" rows="4" formControlName="message" placeholder="Tell us how your business currently operates and what software features you need..." [class.invalid]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"></textarea>
+            <span *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="err-text">
+              Please provide project details (min 10 characters).
+            </span>
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="isSubmitting()">
+            <span *ngIf="!isSubmitting()">Let's Build Something Better →</span>
+            <span *ngIf="isSubmitting()">Sending Inquiry...</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

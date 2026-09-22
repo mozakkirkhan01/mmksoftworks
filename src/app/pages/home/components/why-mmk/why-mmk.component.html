@@ -1,0 +1,22 @@
+<section class="mmk-section why-section">
+  <div class="mmk-container">
+    <div class="why-header text-center">
+      <span class="eyebrow">THE MMK DIFFERENCE</span>
+      <h2 class="section-title">
+        Software shouldn't make <br>
+        <span class="gradient-text">your business more complicated.</span>
+      </h2>
+      <p class="section-subtitle">
+        We build technology around real operational requirements, keeping software powerful, simple, and reliable.
+      </p>
+    </div>
+
+    <div class="benefits-grid">
+      <div *ngFor="let b of benefits" class="benefit-card mmk-glass-card">
+        <div class="benefit-num">{{ b.num }}</div>
+        <h3 class="benefit-title">{{ b.title }}</h3>
+        <p class="benefit-desc">{{ b.desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>

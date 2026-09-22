@@ -1,0 +1,67 @@
+<section #techRef class="mmk-section tech-section">
+  <div class="mmk-container">
+    <div class="tech-header text-center">
+      <span class="eyebrow">ENTERPRISE STACK</span>
+      <h2 class="section-title">
+        Modern technology. <br>
+        <span class="gradient-text">Built for real-world operations.</span>
+      </h2>
+      <p class="section-subtitle">
+        We rely on field-tested software frameworks and high-concurrency database architectures designed to handle millions of daily transactions.
+      </p>
+    </div>
+
+    <!-- Animated Architecture Pipeline Diagram -->
+    <div class="arch-diagram-card mmk-glass-card">
+      <div class="card-label">ENTERPRISE SYSTEM ARCHITECTURE</div>
+
+      <div class="pipeline-grid">
+        <!-- Tier 1: Frontend -->
+        <div class="arch-node tier-node">
+          <div class="node-header">FRONTEND LAYER</div>
+          <div class="node-title">Angular Application</div>
+          <div class="node-tags">TypeScript • HTML5 • SCSS</div>
+        </div>
+
+        <div class="flow-arrow">
+          <svg class="request-line" viewBox="0 0 100 20">
+            <line x1="0" y1="10" x2="100" y2="10" stroke="#19D3FF" stroke-width="2" stroke-dasharray="6"/>
+          </svg>
+          <span class="flow-label">HTTPS / JSON API</span>
+        </div>
+
+        <!-- Tier 2: Backend API -->
+        <div class="arch-node tier-node">
+          <div class="node-header">BACKEND SERVICES</div>
+          <div class="node-title">ASP.NET Core API</div>
+          <div class="node-tags">C# • Web API • LINQ</div>
+        </div>
+
+        <div class="flow-arrow">
+          <svg class="request-line" viewBox="0 0 100 20">
+            <line x1="0" y1="10" x2="100" y2="10" stroke="#20D6B5" stroke-width="2" stroke-dasharray="6"/>
+          </svg>
+          <span class="flow-label">Business Logic</span>
+        </div>
+
+        <!-- Tier 3: Database -->
+        <div class="arch-node tier-node">
+          <div class="node-header">DATA ENGINE</div>
+          <div class="node-title">MS SQL Server</div>
+          <div class="node-tags">Stored Procedures • Dapper</div>
+        </div>
+      </div>
+
+      <!-- External Integrations Row -->
+      <div class="external-integrations-wrapper">
+        <div class="ext-title">INTEGRATED EXTERNAL SERVICES</div>
+        <div class="ext-nodes-grid">
+          <div *ngFor="let ext of externalNodes" class="ext-node-card">
+            <div class="ext-name">{{ ext.title }}</div>
+            <div class="ext-sub">{{ ext.sub }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

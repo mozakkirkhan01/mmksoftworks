@@ -1,0 +1,114 @@
+.industries-section {
+  background-color: #04111d;
+}
+
+.ind-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+
+  .eyebrow {
+    justify-content: center;
+  }
+}
+
+.ind-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ind-card {
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .card-icon-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    .svg-icon-wrapper {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(25, 211, 255, 0.08);
+      border: 1px solid rgba(25, 211, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mmk-cyan);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+
+      svg {
+        width: 26px;
+        height: 26px;
+      }
+    }
+
+    .ind-arrow-btn {
+      color: var(--mmk-muted-light);
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+  }
+
+  .ind-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--mmk-white);
+    margin-bottom: 0.75rem;
+  }
+
+  .ind-desc {
+    font-size: 0.925rem;
+    color: var(--mmk-muted-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .modules-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .mod-tag {
+      font-family: var(--font-code);
+      font-size: 0.725rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--mmk-cyan);
+    }
+  }
+
+  &:hover {
+    .svg-icon-wrapper {
+      transform: scale(1.08);
+      border-color: var(--mmk-cyan);
+      background: rgba(25, 211, 255, 0.15);
+    }
+
+    .ind-arrow-btn {
+      color: var(--mmk-cyan);
+      transform: translateX(4px);
+    }
+
+    .ind-title {
+      color: var(--mmk-cyan);
+    }
+  }
+}

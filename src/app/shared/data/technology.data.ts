@@ -1,0 +1,44 @@
+import { TechLayer } from '../../core/models/technology.model';
+
+export const TECH_STACK_DATA: TechLayer[] = [
+  {
+    title: 'FRONTEND ARCHITECTURE',
+    subtitle: 'High-speed, responsive, single-page application interfaces.',
+    items: [
+      { name: 'Angular', category: 'frontend', description: 'Enterprise frontend framework for robust single-page applications.' },
+      { name: 'TypeScript', category: 'frontend', description: 'Strongly typed code eliminating runtime UI errors.' },
+      { name: 'HTML5 & SCSS', category: 'frontend', description: 'Semantic markup and modular SCSS custom styling.' },
+      { name: 'Bootstrap & Angular Material', category: 'frontend', description: 'Accessible, touch-friendly UI component libraries.' }
+    ]
+  },
+  {
+    title: 'BACKEND SERVICES & APIS',
+    subtitle: 'Secure, high-concurrency microservices and Web APIs.',
+    items: [
+      { name: 'ASP.NET Core', category: 'backend', description: 'High-performance cross-platform web API framework.' },
+      { name: 'C#', category: 'backend', description: 'Clean object-oriented architecture for enterprise business logic.' },
+      { name: 'Entity Framework & LINQ', category: 'backend', description: 'Type-safe object-relational mapping and database queries.' },
+      { name: 'RESTful Web APIs', category: 'backend', description: 'Lightweight JSON endpoints for frontend and mobile apps.' }
+    ]
+  },
+  {
+    title: 'DATA ENGINE & STORAGE',
+    subtitle: 'Bulletproof transactional consistency and high-speed queries.',
+    items: [
+      { name: 'Microsoft SQL Server', category: 'data', description: 'Enterprise relational database for high-throughput operations.' },
+      { name: 'Stored Procedures', category: 'data', description: 'Pre-compiled database logic for maximum query performance.' },
+      { name: 'Dapper ORM', category: 'data', description: 'Micro-ORM delivering near raw-SQL execution speed.' },
+      { name: 'Database Optimization', category: 'data', description: 'Index tuning, query optimization, and automated backups.' }
+    ]
+  },
+  {
+    title: 'TOOLS, CLOUD & INTEGRATIONS',
+    subtitle: 'Seamless DevOps deployment and third-party service connectors.',
+    items: [
+      { name: 'Visual Studio & VS Code', category: 'tools', description: 'Industry-standard enterprise IDE development tools.' },
+      { name: 'Git & GitHub', category: 'tools', description: 'Version control and continuous integration pipelines.' },
+      { name: 'Microsoft Azure', category: 'tools', description: 'Cloud hosting, SSL security, and database backup storage.' },
+      { name: 'Integrations', category: 'tools', description: 'Razorpay Payment Gateway, Meta WhatsApp API, SMS Gateways.' }
+    ]
+  }
+];

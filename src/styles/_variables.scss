@@ -1,0 +1,35 @@
+:root {
+  /* MMK Brand Colors */
+  --mmk-navy: #071827;
+  --mmk-dark: #04111D;
+  --mmk-blue: #168BFF;
+  --mmk-cyan: #19D3FF;
+  --mmk-teal: #20D6B5;
+  --mmk-white: #ffffff;
+  --mmk-bg: #f5f8fc;
+  --mmk-bg-dark: #04111d;
+  --mmk-card-dark: rgba(7, 24, 39, 0.7);
+  --mmk-card-border: rgba(25, 211, 255, 0.12);
+  --mmk-text: #0a1726;
+  --mmk-text-light: #f1f5f9;
+  --mmk-muted: #667085;
+  --mmk-muted-light: #94a3b8;
+  --mmk-glow-blue: rgba(22, 139, 255, 0.2);
+  --mmk-glow-cyan: rgba(25, 211, 255, 0.2);
+
+  /* Gradients */
+  --mmk-gradient-primary: linear-gradient(135deg, #168BFF 0%, #19D3FF 50%, #20D6B5 100%);
+  --mmk-gradient-text: linear-gradient(135deg, #ffffff 30%, #19D3FF 70%, #20D6B5 100%);
+  --mmk-gradient-glow: radial-gradient(circle, rgba(25, 211, 255, 0.15) 0%, rgba(7, 24, 39, 0) 70%);
+
+  /* Fonts */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: 'Fira Code', monospace;
+
+  /* Layout Spacing */
+  --section-padding-desktop: 140px 0;
+  --section-padding-tablet: 100px 0;
+  --section-padding-mobile: 72px 0;
+  --max-width: 1320px;
+}

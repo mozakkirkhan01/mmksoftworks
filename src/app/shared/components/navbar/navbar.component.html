@@ -1,0 +1,100 @@
+<header class="mmk-navbar-header" [class.scrolled]="isScrolled()">
+  <div class="mmk-container">
+    <nav class="mmk-nav" aria-label="Main Navigation">
+      <!-- Logo -->
+      <a routerLink="/" class="mmk-logo-link" (click)="closeMobileMenu()">
+        <img src="assets/logo.png" alt="MMK Softworks Logo" class="logo-image" />
+        <div class="logo-text">
+          <span class="brand-name">MMK <span class="highlight">SOFTWORKS</span></span>
+          <span class="brand-tag">IDEAS → CODE → IMPACT</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="desktop-menu">
+        <!-- Solutions Dropdown -->
+        <div class="nav-item has-dropdown" (mouseenter)="openDropdown('solutions')" (mouseleave)="closeDropdown()">
+          <a routerLink="/solutions" routerLinkActive="active" class="nav-link">
+            Solutions
+            <svg class="dropdown-chevron" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <div class="dropdown-menu mega-menu" [class.show]="activeDropdown() === 'solutions'">
+            <div class="dropdown-grid">
+              <a *ngFor="let item of solutions" [routerLink]="['/solutions', item.slug]" class="dropdown-card" (click)="closeDropdown()">
+                <div class="item-title">{{ item.title }}</div>
+                <div class="item-desc">{{ item.shortDescription }}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Industries Dropdown -->
+        <div class="nav-item has-dropdown" (mouseenter)="openDropdown('industries')" (mouseleave)="closeDropdown()">
+          <a routerLink="/industries" routerLinkActive="active" class="nav-link">
+            Industries
+            <svg class="dropdown-chevron" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <div class="dropdown-menu" [class.show]="activeDropdown() === 'industries'">
+            <a *ngFor="let ind of industries" [routerLink]="['/industries']" class="dropdown-item" (click)="closeDropdown()">
+              <span>{{ ind.title }}</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="nav-item has-dropdown" (mouseenter)="openDropdown('services')" (mouseleave)="closeDropdown()">
+          <a routerLink="/services" routerLinkActive="active" class="nav-link">
+            Services
+            <svg class="dropdown-chevron" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <div class="dropdown-menu" [class.show]="activeDropdown() === 'services'">
+            <a *ngFor="let srv of services" [routerLink]="['/services']" class="dropdown-item" (click)="closeDropdown()">
+              <span>{{ srv.title }}</span>
+            </a>
+          </div>
+        </div>
+
+        <a routerLink="/projects" routerLinkActive="active" class="nav-link">Projects</a>
+        <a routerLink="/technology" routerLinkActive="active" class="nav-link">Technology</a>
+        <a routerLink="/about" routerLinkActive="active" class="nav-link">Company</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <a routerLink="/contact" class="mmk-btn mmk-btn-primary">
+          <span>Contact Us</span>
+          <svg class="btn-arrow" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+
+        <!-- Hamburger Toggle -->
+        <button class="mobile-toggle" (click)="toggleMobileMenu()" [class.active]="mobileMenuOpen()" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" [class.open]="mobileMenuOpen()">
+    <div class="mobile-nav-links">
+      <a routerLink="/" (click)="closeMobileMenu()">Home</a>
+      <a routerLink="/solutions" (click)="closeMobileMenu()">Solutions</a>
+      <a routerLink="/services" (click)="closeMobileMenu()">Services</a>
+      <a routerLink="/industries" (click)="closeMobileMenu()">Industries</a>
+      <a routerLink="/projects" (click)="closeMobileMenu()">Projects</a>
+      <a routerLink="/technology" (click)="closeMobileMenu()">Technology</a>
+      <a routerLink="/about" (click)="closeMobileMenu()">Company</a>
+      <a routerLink="/contact" class="mobile-cta-btn" (click)="closeMobileMenu()">Contact Us →</a>
+    </div>
+  </div>
+</header>

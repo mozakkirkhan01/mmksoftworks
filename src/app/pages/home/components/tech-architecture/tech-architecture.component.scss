@@ -1,0 +1,137 @@
+.tech-section {
+  background-color: #030c15;
+}
+
+.tech-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+
+  .eyebrow {
+    justify-content: center;
+  }
+}
+
+.arch-diagram-card {
+  padding: 3rem;
+  position: relative;
+}
+
+.card-label {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--mmk-cyan);
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.pipeline-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.tier-node {
+  flex: 1;
+  padding: 1.75rem 1.25rem;
+  background: rgba(4, 17, 29, 0.8);
+  border: 1px solid rgba(25, 211, 255, 0.2);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+  .node-header {
+    font-family: var(--font-code);
+    font-size: 0.675rem;
+    color: var(--mmk-teal);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+
+  .node-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--mmk-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .node-tags {
+    font-size: 0.8rem;
+    color: var(--mmk-muted-light);
+  }
+}
+
+.flow-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+
+  .request-line {
+    width: 80px;
+    height: 12px;
+  }
+
+  .flow-label {
+    font-family: var(--font-code);
+    font-size: 0.65rem;
+    color: var(--mmk-cyan);
+  }
+}
+
+.external-integrations-wrapper {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 2rem;
+
+  .ext-title {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--mmk-muted-light);
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+}
+
+.ext-nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ext-node-card {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+
+  .ext-name {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--mmk-white);
+  }
+
+  .ext-sub {
+    font-size: 0.725rem;
+    color: var(--mmk-cyan);
+  }
+}

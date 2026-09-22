@@ -1,0 +1,219 @@
+.projects-section {
+  background-color: #030c15;
+}
+
+.proj-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+
+  .eyebrow {
+    justify-content: center;
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-mockup-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-header {
+  height: 36px;
+  background: rgba(4, 17, 29, 0.9);
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  .dots {
+    display: flex;
+    gap: 6px;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+
+      &.red { background-color: #ff5f56; }
+      &.yellow { background-color: #ffbd2e; }
+      &.green { background-color: #27c93f; }
+    }
+  }
+
+  .browser-address {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    color: var(--mmk-muted-light);
+  }
+}
+
+.mockup-content-area {
+  height: 220px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-preview-ui {
+  width: 90%;
+  height: 90%;
+  background: rgba(7, 24, 39, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 10px;
+  border: 1px solid rgba(25, 211, 255, 0.25);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  overflow: hidden;
+  transition: transform 0.35s ease;
+
+  .preview-sidebar {
+    width: 25%;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .bar {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .preview-main {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .header-bar {
+      .tag-chip {
+        font-family: var(--font-code);
+        font-size: 0.65rem;
+        color: var(--mmk-cyan);
+      }
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 0.5rem;
+
+      .stat-box {
+        flex: 1;
+        height: 28px;
+        border-radius: 6px;
+        background: rgba(25, 211, 255, 0.1);
+        border: 1px solid rgba(25, 211, 255, 0.2);
+      }
+    }
+
+    .table-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+
+      .t-row {
+        height: 12px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}
+
+.project-details-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .client-tag {
+    font-family: var(--font-code);
+    font-size: 0.725rem;
+    color: var(--mmk-cyan);
+    margin-bottom: 0.5rem;
+  }
+
+  .proj-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--mmk-white);
+    margin-bottom: 0.75rem;
+  }
+
+  .proj-summary {
+    font-size: 0.9rem;
+    color: var(--mmk-muted-light);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .features-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--mmk-text-light);
+    }
+  }
+
+  .card-footer-link {
+    margin-top: auto;
+
+    .view-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--mmk-cyan);
+      text-decoration: none;
+
+      svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.25s ease;
+      }
+
+      &:hover svg {
+        transform: translateX(4px);
+      }
+    }
+  }
+}
+
+.project-mockup-card:hover {
+  .dashboard-preview-ui {
+    transform: scale(1.04);
+  }
+
+  .proj-title {
+    color: var(--mmk-cyan);
+  }
+}
