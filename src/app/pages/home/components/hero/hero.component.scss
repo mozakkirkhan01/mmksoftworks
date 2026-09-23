@@ -158,18 +158,18 @@
   perspective: 1200px;
 
   @media (max-width: 1024px) {
-    height: 480px;
+    height: 490px;
     margin-top: 2rem;
   }
 
   @media (max-width: 640px) {
-    height: 400px;
+    height: 420px;
     transform: scale(0.85);
   }
 
   @media (max-width: 420px) {
-    height: 350px;
-    transform: scale(0.72);
+    height: 370px;
+    transform: scale(0.74);
   }
 }
 
@@ -196,6 +196,45 @@
   filter: blur(40px);
   pointer-events: none;
   z-index: 1;
+  transition: all 0.5s ease;
+
+  &.disco-glow {
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(25, 211, 255, 0.25) 50%, transparent 70%);
+    filter: blur(50px);
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* Floating Dance Musical Particles */
+.dance-particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+
+  .dance-note {
+    position: absolute;
+    bottom: 25%;
+    font-size: 1.6rem;
+    animation: floatNote 1.8s infinite ease-out;
+  }
+}
+
+@keyframes floatNote {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-220px) scale(1.3) rotate(25deg);
+    opacity: 0;
+  }
 }
 
 .robot-3d-box {
@@ -205,7 +244,6 @@
   transform-style: preserve-3d;
   will-change: transform;
   z-index: 2;
-  cursor: pointer;
 
   .robot-image {
     width: 100%;
@@ -220,6 +258,75 @@
   &:hover .robot-image {
     filter: drop-shadow(0 24px 50px rgba(25, 211, 255, 0.35));
   }
+}
+
+/* Articulated Left Hand (Clickable to Wave) */
+.robot-hand.hand-left {
+  position: absolute;
+  left: 3.61%;
+  top: 52.72%;
+  width: 24.04%;
+  height: 16.70%;
+  transform-origin: 90% 50%;
+  cursor: pointer;
+  z-index: 4;
+  transition: filter 0.25s ease;
+
+  .hand-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  &:hover {
+    filter: drop-shadow(0 0 12px rgba(25, 211, 255, 0.9));
+  }
+
+  .interactive-hint-dot {
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #19D3FF;
+    box-shadow: 0 0 8px #00E5FF;
+    animation: hintPulse 2s infinite ease-in-out;
+  }
+}
+
+/* Right Hand Click Target */
+.robot-hand-target.hand-right {
+  position: absolute;
+  left: 69.71%;
+  top: 60.63%;
+  width: 27.64%;
+  height: 19.33%;
+  cursor: pointer;
+  z-index: 4;
+  border-radius: 50%;
+
+  &:hover {
+    box-shadow: inset 0 0 15px rgba(25, 211, 255, 0.4), 0 0 15px rgba(25, 211, 255, 0.4);
+  }
+
+  .interactive-hint-dot {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #19D3FF;
+    box-shadow: 0 0 8px #00E5FF;
+    animation: hintPulse 2s infinite ease-in-out;
+  }
+}
+
+@keyframes hintPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #00E5FF; }
 }
 
 /* Interactive Visor Face Elements */
@@ -241,6 +348,10 @@
     justify-content: center;
     transform-origin: center center;
     will-change: transform;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 5;
+    transition: box-shadow 0.2s ease;
 
     &.eye-left {
       left: 37.19%;
@@ -266,6 +377,22 @@
       box-shadow: 0 0 6px #ffffff;
       will-change: transform;
     }
+
+    &:hover {
+      box-shadow: 0 0 22px #00E5FF, 0 0 35px rgba(0, 229, 255, 0.95);
+    }
+  }
+
+  .visor-click-target {
+    position: absolute;
+    left: 28%;
+    top: 20%;
+    width: 44%;
+    height: 24%;
+    cursor: pointer;
+    pointer-events: auto;
+    border-radius: 35px;
+    z-index: 3;
   }
 
   .smile-glow {
@@ -281,6 +408,56 @@
   }
 }
 
+/* Interactive Stomach / Belly Click Target (Tickle to Dance) */
+.stomach-interactive-target {
+  position: absolute;
+  left: 37%;
+  top: 66%;
+  width: 26%;
+  height: 14%;
+  cursor: pointer;
+  z-index: 4;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+
+  .stomach-pulse-ring {
+    position: absolute;
+    width: 85%;
+    height: 75%;
+    border-radius: 20px;
+    border: 1.5px dashed rgba(25, 211, 255, 0.4);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .stomach-hint-label {
+    font-family: var(--font-code);
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: #19D3FF;
+    background: rgba(4, 17, 29, 0.88);
+    border: 1px solid rgba(25, 211, 255, 0.35);
+    padding: 2px 7px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: all 0.25s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  &:hover {
+    .stomach-pulse-ring, .stomach-hint-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 /* Chest Arc Reactor Core */
 .chest-reactor-glow {
   position: absolute;
@@ -291,6 +468,7 @@
   transform: translate(-50%, -50%);
   border-radius: 50%;
   pointer-events: none;
+  z-index: 3;
 
   .reactor-pulse {
     width: 100%;
@@ -299,6 +477,10 @@
     background: #19D3FF;
     box-shadow: 0 0 16px #00E5FF, 0 0 25px rgba(25, 211, 255, 0.8);
     animation: coreReactorPulse 2.4s infinite ease-in-out;
+  }
+
+  &.turbo-pulse .reactor-pulse {
+    animation: coreTurboPulse 0.4s infinite alternate;
   }
 }
 
@@ -313,6 +495,11 @@
     opacity: 1;
     box-shadow: 0 0 22px #00E5FF, 0 0 35px rgba(25, 211, 255, 0.9);
   }
+}
+
+@keyframes coreTurboPulse {
+  0% { transform: scale(1); box-shadow: 0 0 15px #00E5FF; }
+  100% { transform: scale(1.4); box-shadow: 0 0 35px #00E5FF, 0 0 50px rgba(168, 85, 247, 0.9); }
 }
 
 /* Welcome Speech Pill */
@@ -335,6 +522,7 @@
   z-index: 5;
   white-space: nowrap;
   animation: floatBubble 3s infinite ease-in-out alternate;
+  transition: all 0.3s ease;
 
   .speech-status-dot {
     width: 7px;
@@ -343,6 +531,18 @@
     background: #10b981;
     box-shadow: 0 0 8px #10b981;
     flex-shrink: 0;
+    transition: background 0.3s ease;
+
+    &.disco-dot {
+      background: #a855f7;
+      box-shadow: 0 0 10px #a855f7;
+      animation: discoFlicker 0.4s infinite alternate;
+    }
+  }
+
+  &.dance-bubble {
+    border-color: #a855f7;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.4);
   }
 
   .speech-txt strong {
@@ -362,6 +562,66 @@
   100% { transform: translateY(-6px); }
 }
 
+@keyframes discoFlicker {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Interactive Action Control Badges */
+.robot-action-badges {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 6;
+
+  .action-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    background: rgba(7, 24, 39, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(25, 211, 255, 0.3);
+    color: var(--mmk-text-main);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+    .badge-icon {
+      font-size: 0.85rem;
+    }
+
+    &:hover {
+      background: rgba(22, 139, 255, 0.25);
+      border-color: var(--mmk-cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(25, 211, 255, 0.4);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  @media (max-width: 640px) {
+    bottom: -28px;
+    gap: 0.4rem;
+
+    .action-badge {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.7rem;
+    }
+  }
+}
+
 /* Holographic Floor Pedestal / Shadow */
 .holo-pedestal {
   position: absolute;
@@ -372,6 +632,7 @@
   height: 45px;
   pointer-events: none;
   z-index: 1;
+  transition: all 0.4s ease;
 
   .holo-ring {
     position: absolute;
@@ -385,6 +646,7 @@
       height: 100%;
       border: 1.5px solid rgba(25, 211, 255, 0.28);
       box-shadow: 0 0 20px rgba(25, 211, 255, 0.15);
+      transition: all 0.4s ease;
     }
 
     &.inner-ring {
@@ -392,6 +654,7 @@
       height: 65%;
       border: 1px dashed rgba(25, 211, 255, 0.4);
       animation: rotateHoloRing 16s linear infinite;
+      transition: all 0.4s ease;
     }
   }
 
@@ -405,6 +668,21 @@
     border-radius: 50%;
     background: radial-gradient(ellipse at center, rgba(25, 211, 255, 0.35) 0%, rgba(22, 139, 255, 0.1) 45%, transparent 75%);
     filter: blur(6px);
+    transition: all 0.4s ease;
+  }
+
+  &.party-pedestal {
+    .outer-ring {
+      border-color: #00E5FF;
+      box-shadow: 0 0 30px #00E5FF, 0 0 50px rgba(168, 85, 247, 0.7);
+    }
+    .inner-ring {
+      border-color: #a855f7;
+      animation: rotateHoloRing 4s linear infinite;
+    }
+    .holo-glow-disk {
+      background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.6) 0%, rgba(25, 211, 255, 0.3) 50%, transparent 75%);
+    }
   }
 }
 
@@ -431,6 +709,18 @@
 
     .speech-txt strong {
       color: #0284c7;
+    }
+  }
+
+  .action-badge {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(22, 139, 255, 0.25);
+    color: #0f172a;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+    &:hover {
+      background: rgba(22, 139, 255, 0.15);
+      border-color: #0284c7;
     }
   }
 

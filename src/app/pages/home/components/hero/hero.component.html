@@ -37,42 +37,99 @@
     <div class="hero-visual-wrapper">
       <div class="robot-stage">
         <!-- Floating Tech Glow Backdrop Aura -->
-        <div class="robot-glow-aura"></div>
+        <div class="robot-glow-aura" [class.disco-glow]="isDancing()"></div>
+
+        <!-- Floating Dance Musical Particles -->
+        <div class="dance-particles-container" *ngIf="isDancing()">
+          <span *ngFor="let p of danceNotes" class="dance-note" [style.left.%]="p.left" [style.animationDelay.s]="p.delay">
+            {{ p.icon }}
+          </span>
+        </div>
 
         <!-- 3D Interactive Robot Box -->
-        <div class="robot-3d-box">
-          <img src="assets/robot.png" alt="MMK 3D Intelligent Assistant Robot" class="robot-image" />
+        <div class="robot-3d-box" [class.dancing]="isDancing()">
+          <!-- Base Robot Body -->
+          <img src="assets/robot-body.png" alt="MMK AI 3D Robot" class="robot-image" />
+
+          <!-- Articulated Interactive Waving Left Hand -->
+          <div class="robot-hand hand-left" 
+               (click)="onHandClick('left', $event)" 
+               title="Click my hand to wave! 👋">
+            <img src="assets/robot-hand-left.png" alt="Robot Hand" class="hand-img" />
+            <span class="interactive-hint-dot hand-dot"></span>
+          </div>
+
+          <!-- Interactive Right Hand Click Target -->
+          <div class="robot-hand-target hand-right" 
+               (click)="onHandClick('right', $event)" 
+               title="Click my hand to wave! 👋">
+            <span class="interactive-hint-dot hand-dot"></span>
+          </div>
 
           <!-- Interactive Visor Face & Eye Overlays -->
           <div class="visor-interactive-overlay">
-            <!-- Left Eye Tracking Pupil & Glow -->
-            <div class="eye-glow eye-left">
+            <!-- Left Eye (Clickable) -->
+            <div class="eye-glow eye-left" 
+                 (click)="onEyeClick($event)" 
+                 title="Click my eyes to blink! 😉">
               <span class="pupil-dot"></span>
             </div>
 
-            <!-- Right Eye Tracking Pupil & Glow -->
-            <div class="eye-glow eye-right">
+            <!-- Right Eye (Clickable) -->
+            <div class="eye-glow eye-right" 
+                 (click)="onEyeClick($event)" 
+                 title="Click my eyes to blink! 😉">
               <span class="pupil-dot"></span>
+            </div>
+
+            <!-- Visor Whole-Face Click Hotspot -->
+            <div class="visor-click-target" 
+                 (click)="onEyeClick($event)" 
+                 title="Click my eyes to blink! 😉">
             </div>
 
             <!-- Cyan Luminous Smile Arc -->
             <div class="smile-glow"></div>
           </div>
 
+          <!-- Interactive Stomach / Belly Click Target -->
+          <div class="stomach-interactive-target" 
+               (click)="onStomachClick($event)" 
+               title="Tickle my stomach to make me dance! 🕺">
+            <span class="stomach-pulse-ring"></span>
+            <span class="stomach-hint-label">Tickle me!</span>
+          </div>
+
           <!-- Pulsing Chest Arc Reactor Core -->
-          <div class="chest-reactor-glow">
+          <div class="chest-reactor-glow" [class.turbo-pulse]="isDancing()">
             <div class="reactor-pulse"></div>
           </div>
 
           <!-- Interactive Welcome Speech Pill -->
-          <div class="robot-speech-pill">
-            <span class="speech-status-dot"></span>
-            <span class="speech-txt">Hi! I'm <strong>MMK Bot</strong>. Ready to build?</span>
+          <div class="robot-speech-pill" [class.dance-bubble]="isDancing()">
+            <span class="speech-status-dot" [class.disco-dot]="isDancing()"></span>
+            <span class="speech-txt" [innerHTML]="speechText()"></span>
+          </div>
+
+          <!-- Interactive Control Action Badges -->
+          <div class="robot-action-badges">
+            <button class="action-badge" (click)="onHandClick('left', $event)" title="Click to wave hand">
+              <span class="badge-icon">👋</span>
+              <span class="badge-label">Wave</span>
+            </button>
+            <button class="action-badge" (click)="onEyeClick($event)" title="Click to blink eyes">
+              <span class="badge-icon">😉</span>
+              <span class="badge-label">Blink</span>
+            </button>
+            <button class="action-badge" (click)="onStomachClick($event)" title="Click to dance">
+              <span class="badge-icon">🕺</span>
+              <span class="badge-label">Dance</span>
+            </button>
           </div>
         </div>
 
         <!-- Holographic Floor Pedestal / Shadow -->
-        <div class="holo-pedestal">
+        <div class="holo-pedestal" [class.party-pedestal]="isDancing()">
           <div class="holo-ring outer-ring"></div>
           <div class="holo-ring inner-ring"></div>
           <div class="holo-glow-disk"></div>
