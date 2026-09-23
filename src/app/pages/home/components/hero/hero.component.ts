@@ -21,7 +21,7 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.ctx = this.animationService.createContext(this.heroRef, () => {
       gsap.set('.hero-reveal', { opacity: 0, y: 35 });
-      gsap.set('.cyber-robot-wrapper', { opacity: 0, scale: 0.8, y: 40 });
+      gsap.set('.robot-stage', { opacity: 0, scale: 0.8, y: 40 });
 
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
@@ -31,7 +31,7 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
         duration: 0.9,
         stagger: 0.15
       })
-      .to('.cyber-robot-wrapper', {
+      .to('.robot-stage', {
         opacity: 1,
         scale: 1,
         y: 0,
@@ -39,8 +39,8 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
         ease: 'back.out(1.5)'
       }, '-=0.5');
 
-      // Floating float levitation animation
-      gsap.to('.cyber-bot', {
+      // Floating robot levitation animation
+      gsap.to('.robot-3d-box', {
         y: '+=12',
         duration: 2.8,
         repeat: -1,
@@ -48,9 +48,20 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
         ease: 'sine.inOut'
       });
 
-      // Levitating shoulder pods animation
-      gsap.to('.left-pod', { y: '-=8', duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-      gsap.to('.right-pod', { y: '+=8', duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 0.3 });
+      // Synchronized holographic pedestal shadow
+      gsap.to('.holo-pedestal', {
+        scale: 0.86,
+        opacity: 0.6,
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // Natural blinking animation
+      gsap.timeline({ repeat: -1, repeatDelay: 3.5 })
+        .to('.eye-glow', { scaleY: 0.1, duration: 0.1, ease: 'power1.inOut' })
+        .to('.eye-glow', { scaleY: 1, duration: 0.12, ease: 'power1.inOut' });
     });
   }
 
@@ -60,35 +71,35 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
     const relX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const relY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-    // 3D Head Tilt Motion
-    gsap.to('.bot-head', {
-      rotationY: relX * 36,
-      rotationX: -relY * 26,
-      rotationZ: relX * 6,
+    // 3D Robot Perspective Tilt
+    gsap.to('.robot-3d-box', {
+      rotationY: relX * 24,
+      rotationX: -relY * 18,
+      rotationZ: relX * 4,
       duration: 0.35,
       ease: 'power2.out'
     });
 
     // Eye Pupils Tracking Cursor Position
-    gsap.to('.pupil-iris', {
-      x: relX * 16,
-      y: relY * 12,
-      duration: 0.2,
+    gsap.to('.pupil-dot', {
+      x: relX * 7,
+      y: relY * 5,
+      duration: 0.18,
       ease: 'power2.out'
     });
 
-    // Shoulder Pods Reaction
-    gsap.to('.left-pod', {
+    // Speech pill reaction
+    gsap.to('.robot-speech-pill', {
       x: relX * -10,
       y: relY * -8,
       duration: 0.45,
       ease: 'power2.out'
     });
 
-    gsap.to('.right-pod', {
+    // Holographic ground pedestal shift
+    gsap.to('.holo-pedestal', {
       x: relX * 10,
-      y: relY * 8,
-      duration: 0.45,
+      duration: 0.4,
       ease: 'power2.out'
     });
   }
