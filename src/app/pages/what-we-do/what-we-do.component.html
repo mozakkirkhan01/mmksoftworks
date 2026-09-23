@@ -1,0 +1,231 @@
+<!-- Page Header -->
+<section class="mmk-section inner-page-hero">
+  <div class="mmk-container text-center">
+    <span class="eyebrow">WHAT WE DO</span>
+    <h1 class="hero-title">
+      Building Smart Software <br>
+      <span class="brand-gradient-text">for Growing Businesses.</span>
+    </h1>
+    <p class="section-subtitle mx-auto">
+      MMK Softworks designs, engineers, and deploys custom ERP platforms, business automation engines, and enterprise web applications.
+    </p>
+
+    <!-- Quick Jump Menu -->
+    <div class="quick-nav-pills">
+      <a href="what-we-do#introduction" class="quick-pill">Introduction</a>
+      <a href="what-we-do#ecosystem-visual-section" class="quick-pill">Software Ecosystem</a>
+      <a href="what-we-do#vision-mission" class="quick-pill">Vision & Mission</a>
+      <a href="what-we-do#why-choose-us" class="quick-pill">Why Choose Us</a>
+      <a href="what-we-do#core-offerings" class="quick-pill">Core Offerings</a>
+    </div>
+  </div>
+</section>
+
+<!-- Section 1: Introduction -->
+<section id="introduction" class="mmk-section intro-section">
+  <div class="mmk-container">
+    <div class="intro-grid">
+      <div class="intro-content">
+        <span class="eyebrow">01 • INTRODUCTION</span>
+        <h2 class="section-title">
+          Custom software engineered around <br>
+          <span class="gradient-text">your real operational workflow.</span>
+        </h2>
+        <p class="section-subtitle">
+          MMK Softworks is an Indian software development company dedicated to helping organizations eliminate manual operational bottlenecks. We believe software should conform to your business rules—not the other way around.
+        </p>
+        <p class="intro-body-text">
+          Whether you need a full-scale Custom ERP for your educational institution, travel agency, retail chain, healthcare clinic, or cooperative society, or simply want to automate repetitive WhatsApp receipts and payment collections, MMK Softworks provides end-to-end engineering excellence.
+        </p>
+
+        <div class="brand-tag-box">
+          <span class="brand-text">IDEAS → CODE → IMPACT</span>
+        </div>
+      </div>
+
+      <div class="intro-card-visual mmk-glass-card">
+        <div class="visual-header">
+          <img src="assets/logo.png" alt="MMK Softworks Logo" class="brand-logo" />
+          <span class="title">MMK CAPABILITY ENGINE</span>
+        </div>
+        <div class="visual-list">
+          <div class="v-item">✓ Custom ERP Development</div>
+          <div class="v-item">✓ Business Automation & Workflows</div>
+          <div class="v-item">✓ Modern Web Apps & Dashboards</div>
+          <div class="v-item">✓ Payment & WhatsApp API Connectors</div>
+          <div class="v-item">✓ GST & Financial Reporting Engine</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: Animated Software Ecosystem Visual Section -->
+<section id="ecosystem-visual-section" class="mmk-section ecosystem-section" #ecosystemRef (mousemove)="onMouseMove($event)">
+  <div class="mmk-container">
+    <div class="section-header text-center">
+      <span class="eyebrow">INTEGRATED SOFTWARE ECOSYSTEM</span>
+      <h2 class="section-title">
+        Connected operational modules <br>
+        <span class="brand-gradient-text">around the MMK Software Engine.</span>
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Explore how MMK Softworks interconnects isolated business departments, database transactions, payment gateways, and automated alerts into one centralized engine.
+      </p>
+    </div>
+
+    <!-- Animated Software Ecosystem Visualization -->
+    <div class="wwd-visual-container">
+      <div class="wwd-ecosystem-visual">
+        <svg class="wwd-connections-svg" viewBox="-400 -300 800 600">
+          <defs>
+            <linearGradient id="wwdLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#168BFF" stop-opacity="0.8"/>
+              <stop offset="50%" stop-color="#19D3FF" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#20D6B5" stop-opacity="0.8"/>
+            </linearGradient>
+            <filter id="wwdGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- SVG Paths -->
+          <g>
+            <path *ngFor="let node of nodes" 
+                  [attr.d]="'M 0 0 L ' + node.x + ' ' + node.y" 
+                  class="connection-path" 
+                  stroke="url(#wwdLineGrad)" 
+                  stroke-width="2" 
+                  fill="none" />
+          </g>
+
+          <!-- Data Particles -->
+          <g>
+            <circle *ngFor="let node of nodes; let i = index" 
+                    [attr.cx]="node.x * 0.4" 
+                    [attr.cy]="node.y * 0.4" 
+                    r="4" 
+                    fill="#19D3FF" 
+                    filter="url(#wwdGlow)">
+              <animateTransform attributeName="transform" type="translate" 
+                [attr.from]="'0 0'" 
+                [attr.to]="node.x * 0.6 + ' ' + node.y * 0.6" 
+                [attr.dur]="(2.5 + i * 0.4) + 's'" 
+                repeatCount="indefinite" />
+            </circle>
+          </g>
+        </svg>
+
+        <!-- Center MMK Hub Node -->
+        <div class="wwd-center-node">
+          <div class="node-inner">
+            <img src="assets/logo.png" alt="MMK Hub" class="center-logo" />
+            <span class="node-title">MMK</span>
+            <span class="node-sub">ENGINE</span>
+          </div>
+          <div class="pulse-ring"></div>
+        </div>
+
+        <!-- Surrounding ERP Nodes -->
+        <div *ngFor="let node of nodes" 
+             class="wwd-erp-node erp-node-item" 
+             [style.transform]="'translate(' + node.x + 'px, ' + node.y + 'px)'">
+          <div class="node-box mmk-glass-card">
+            <span class="node-icon-dot"></span>
+            <span class="node-label">{{ node.title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Vision & Mission -->
+<section id="vision-mission" class="mmk-section vision-section">
+  <div class="mmk-container">
+    <div class="section-header text-center">
+      <span class="eyebrow">03 • OUR PURPOSE & ETHOS</span>
+      <h2 class="section-title">
+        Vision & <span class="brand-gradient-text">Mission.</span>
+      </h2>
+    </div>
+
+    <div class="vision-mission-grid">
+      <div class="card mission-card mmk-glass-card">
+        <div class="card-icon-badge">MISSION</div>
+        <h3>Our Mission</h3>
+        <p>
+          To empower businesses with simple, powerful, and affordable software solutions that improve operational productivity, eliminate manual data entry, and accelerate digital transformation across India.
+        </p>
+        <ul class="mission-bullets">
+          <li>Eliminate paper registers and fragile spreadsheet management.</li>
+          <li>Deliver zero-defect, high-speed single page interfaces.</li>
+          <li>Provide reliable, SLA-backed continuous technical support.</li>
+        </ul>
+      </div>
+
+      <div class="card vision-card mmk-glass-card">
+        <div class="card-icon-badge accent">VISION</div>
+        <h3>Our Vision</h3>
+        <p>
+          To become a trusted software engineering company delivering innovative ERP and business automation solutions that power the daily operations of growing enterprises across every major industry in India.
+        </p>
+        <ul class="mission-bullets">
+          <li>Build field-tested domain expertise across Education, Travel, Retail, and Healthcare.</li>
+          <li>Drive complete digital transformation for Indian SMEs.</li>
+          <li>Champion clean code, security, and sustainable software growth.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Why Choose Us -->
+<section id="why-choose-us" class="mmk-section why-choose-section">
+  <div class="mmk-container">
+    <div class="section-header text-center">
+      <span class="eyebrow">04 • KEY DIFFERENTIATORS</span>
+      <h2 class="section-title">
+        Why Choose <span class="gradient-text">MMK Softworks?</span>
+      </h2>
+      <p class="section-subtitle mx-auto">
+        Six reasons why companies choose MMK Softworks as their trusted long-term software partner.
+      </p>
+    </div>
+
+    <div class="why-grid">
+      <div *ngFor="let item of whyChooseUs" class="why-card mmk-glass-card">
+        <div class="item-num">{{ item.num }}</div>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Core Offerings -->
+<section id="core-offerings" class="mmk-section offerings-section">
+  <div class="mmk-container">
+    <div class="section-header text-center">
+      <span class="eyebrow">05 • WHAT WE DELIVER</span>
+      <h2 class="section-title">
+        Our Core <span class="brand-gradient-text">Offerings.</span>
+      </h2>
+    </div>
+
+    <div class="offerings-grid">
+      <div *ngFor="let off of offerings" class="off-card mmk-glass-card">
+        <h3>{{ off.title }}</h3>
+        <p>{{ off.desc }}</p>
+        <a routerLink="/contact" class="off-link">Get Started →</a>
+      </div>
+    </div>
+
+    <div class="bottom-cta-banner mmk-glass-card text-center mt-5">
+      <h3>Ready to transform your business operations?</h3>
+      <p>Let's discuss how MMK Softworks can build a custom digital platform for your company.</p>
+      <a routerLink="/contact" class="btn-primary-cta">Talk to MMK Softworks →</a>
+    </div>
+  </div>
+</section>

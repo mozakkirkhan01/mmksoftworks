@@ -1,12 +1,12 @@
 :root {
-  /* MMK Brand Colors */
+  /* Default Dark Mode Brand Palette */
   --mmk-navy: #071827;
   --mmk-dark: #04111D;
   --mmk-blue: #168BFF;
   --mmk-cyan: #19D3FF;
   --mmk-teal: #20D6B5;
   --mmk-white: #ffffff;
-  --mmk-bg: #f5f8fc;
+  --mmk-bg: #04111D;
   --mmk-bg-dark: #04111d;
   --mmk-card-dark: rgba(7, 24, 39, 0.7);
   --mmk-card-border: rgba(25, 211, 255, 0.12);
@@ -16,6 +16,8 @@
   --mmk-muted-light: #94a3b8;
   --mmk-glow-blue: rgba(22, 139, 255, 0.2);
   --mmk-glow-cyan: rgba(25, 211, 255, 0.2);
+  --mmk-nav-bg: rgba(4, 17, 29, 0.88);
+  --mmk-heading-color: #ffffff;
 
   /* Gradients */
   --mmk-gradient-primary: linear-gradient(135deg, #168BFF 0%, #19D3FF 50%, #20D6B5 100%);
@@ -32,4 +34,19 @@
   --section-padding-tablet: 100px 0;
   --section-padding-mobile: 72px 0;
   --max-width: 1320px;
+}
+
+/* Light Theme Variable Overrides */
+.mmk-light-theme {
+  --mmk-dark: #f5f8fc;
+  --mmk-bg-dark: #f5f8fc;
+  --mmk-navy: #ffffff;
+  --mmk-white: #0a1726;
+  --mmk-heading-color: #071827;
+  --mmk-card-dark: rgba(255, 255, 255, 0.85);
+  --mmk-card-border: rgba(22, 139, 255, 0.2);
+  --mmk-text-light: #1e293b;
+  --mmk-muted-light: #475569;
+  --mmk-nav-bg: rgba(245, 248, 252, 0.92);
+  --mmk-gradient-text: linear-gradient(135deg, #071827 30%, #168BFF 70%, #20D6B5 100%);
 }

@@ -5,7 +5,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  color: var(--mmk-white);
+  color: var(--mmk-heading-color);
   margin: 0;
 }
 
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-gradient-text {
-  background: linear-gradient(135deg, #19D3FF 0%, #20D6B5 100%);
+  background: linear-gradient(135deg, #19D3FF 0%, #168BFF 50%, #20D6B5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

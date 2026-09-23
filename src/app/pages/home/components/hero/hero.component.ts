@@ -19,23 +19,11 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
   private smoothScrollService = inject(SmoothScrollService);
   private ctx?: gsap.Context;
 
-  nodes = [
-    { title: 'School ERP', id: 'school', angle: -60, x: 260, y: -130 },
-    { title: 'Travel ERP', id: 'travel', angle: -180, x: -300, y: 0 },
-    { title: 'Retail ERP', id: 'retail', angle: 0, x: 300, y: 0 },
-    { title: 'Hospital ERP', id: 'hospital', angle: 130, x: -220, y: 150 },
-    { title: 'Cooperative ERP', id: 'cooperative', angle: 50, x: 220, y: 150 },
-    { title: 'Business Automation', id: 'automation', angle: 90, x: 0, y: 220 }
-  ];
-
   ngAfterViewInit(): void {
     this.ctx = this.animationService.createContext(this.heroRef, () => {
       // 1. Initial State
       gsap.set('.hero-reveal', { opacity: 0, y: 35 });
-      gsap.set('.center-node', { opacity: 0, scale: 0.7 });
-      gsap.set('.erp-node', { opacity: 0, scale: 0.6 });
-      gsap.set('.connection-path', { strokeDasharray: 400, strokeDashoffset: 400 });
-      gsap.set('.particle', { opacity: 0 });
+      gsap.set('.robot-3d-wrapper', { opacity: 0, scale: 0.8, y: 30 });
 
       // 2. Timeline Reveal Sequence
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -46,37 +34,21 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
         duration: 0.9,
         stagger: 0.15
       })
-      .to('.center-node', {
+      .to('.robot-3d-wrapper', {
         opacity: 1,
         scale: 1,
-        duration: 0.8,
+        y: 0,
+        duration: 1.1,
         ease: 'back.out(1.4)'
-      }, '-=0.5')
-      .to('.connection-path', {
-        strokeDashoffset: 0,
-        duration: 1.2,
-        stagger: 0.1
-      }, '-=0.4')
-      .to('.erp-node', {
-        opacity: 1,
-        scale: 1,
-        duration: 0.7,
-        stagger: 0.08,
-        ease: 'back.out(1.3)'
-      }, '-=1.0')
-      .to('.particle', {
-        opacity: 1,
-        duration: 0.5
-      }, '-=0.3');
+      }, '-=0.5');
 
-      // Continuous ambient floating animation
-      gsap.to('.erp-node', {
-        y: '+=8',
+      // Continuous ambient breathing float
+      gsap.to('.robot-body-container', {
+        y: '+=10',
         duration: 3,
         repeat: -1,
         yoyo: true,
-        ease: 'sine.inOut',
-        stagger: 0.3
+        ease: 'sine.inOut'
       });
     });
   }
@@ -87,10 +59,28 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
     const relX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const relY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-    gsap.to('.ecosystem-visual', {
-      rotationY: relX * 8,
-      rotationX: -relY * 8,
-      duration: 0.8,
+    // 1. Rotate Robot Head in 3D Space
+    gsap.to('.robot-head', {
+      rotationY: relX * 32,
+      rotationX: -relY * 22,
+      rotationZ: relX * 5,
+      duration: 0.4,
+      ease: 'power2.out'
+    });
+
+    // 2. Move Robot Pupils (Eyes tracking cursor)
+    gsap.to('.eye-pupil', {
+      x: relX * 14,
+      y: relY * 10,
+      duration: 0.25,
+      ease: 'power2.out'
+    });
+
+    // 3. Subtle Chest Reactor Glow Response
+    gsap.to('.arc-reactor', {
+      x: relX * 8,
+      y: relY * 5,
+      duration: 0.5,
       ease: 'power2.out'
     });
   }

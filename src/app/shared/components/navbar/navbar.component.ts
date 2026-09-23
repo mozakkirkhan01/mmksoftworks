@@ -2,6 +2,7 @@ import { Component, HostListener, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SmoothScrollService } from '../../../core/services/smooth-scroll.service';
+import { ThemeService } from '../../../core/services/theme.service';
 import { SOLUTIONS_DATA } from '../../data/solutions.data';
 import { INDUSTRIES_DATA } from '../../data/industries.data';
 import { SERVICES_DATA } from '../../data/services.data';
@@ -15,6 +16,7 @@ import { SERVICES_DATA } from '../../data/services.data';
 })
 export class NavbarComponent {
   private smoothScroll = inject(SmoothScrollService);
+  themeService = inject(ThemeService);
   
   isScrolled = signal(false);
   mobileMenuOpen = signal(false);
@@ -27,6 +29,10 @@ export class NavbarComponent {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled.set(window.scrollY > 30);
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
   }
 
   toggleMobileMenu() {
