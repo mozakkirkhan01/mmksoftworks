@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 392" width="1024" height="392">
+  <defs>
+    <!-- Brand Cyan-Blue Gradients -->
+    <linearGradient id="cloudGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0052FF" />
+      <stop offset="45%" stop-color="#168BFF" />
+      <stop offset="100%" stop-color="#00E5FF" />
+    </linearGradient>
+
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#168BFF" />
+    </linearGradient>
+
+    <linearGradient id="deepBlueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <linearGradient id="whiteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Cloud Arc / Tech Cloud Silhouette -->
+  <!-- Modern Clean Minimalist Cloud Outline -->
+  <g id="cloud-backdrop">
+    <!-- Cloud Path -->
+    <path d="M 270 230 
+             C 255 170, 305 95, 385 105 
+             C 410 50, 480 20, 560 22 
+             C 650 25, 730 80, 740 160 
+             C 800 160, 850 200, 855 255 
+             C 860 300, 830 340, 785 350
+             L 775 322
+             C 805 315, 825 285, 822 250
+             C 818 210, 778 180, 725 180
+             L 708 180
+             C 695 110, 630 55, 555 52
+             C 490 50, 430 75, 405 125
+             L 398 140
+             C 330 135, 285 185, 298 235
+             Z" 
+          fill="url(#cloudGrad)" />
+  </g>
+
+  <!-- Clean, Simple, Modern MMK Typography & Monogram -->
+  <g id="mmk-letters" transform="translate(150, 185)">
+    <!-- First 'M' -->
+    <path d="M 0 190 L 0 0 L 45 0 L 105 110 L 165 0 L 210 0 L 210 190 L 165 190 L 165 65 L 115 155 L 95 155 L 45 65 L 45 190 Z" 
+          fill="#FFFFFF" />
+    <path d="M 45 65 L 105 170 L 165 65 L 165 80 L 105 190 L 45 80 Z" 
+          fill="url(#cyanGlow)" />
+
+    <!-- Second 'M' -->
+    <g transform="translate(230, 0)">
+      <path d="M 0 190 L 0 0 L 45 0 L 105 110 L 165 0 L 210 0 L 210 190 L 165 190 L 165 65 L 115 155 L 95 155 L 45 65 L 45 190 Z" 
+            fill="#FFFFFF" />
+      <path d="M 45 65 L 105 170 L 165 65 L 165 80 L 105 190 L 45 80 Z" 
+            fill="url(#cyanGlow)" />
+    </g>
+
+    <!-- 'K' -->
+    <g transform="translate(460, 0)">
+      <path d="M 0 190 L 0 0 L 45 0 L 45 190 Z" fill="#FFFFFF" />
+      <!-- Upper diagonal -->
+      <path d="M 45 105 L 140 0 L 195 0 L 90 115 Z" fill="url(#cyanGlow)" />
+      <!-- Lower diagonal -->
+      <path d="M 75 95 L 195 190 L 140 190 L 45 115 Z" fill="#FFFFFF" />
+    </g>
+  </g>
+</svg>

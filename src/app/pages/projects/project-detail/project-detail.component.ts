@@ -57,7 +57,7 @@ import { SeoService } from '../../../core/services/seo.service';
     .inner-page-hero {
       padding-top: 150px;
       padding-bottom: 60px;
-      background-color: #04111d;
+      background-color: var(--mmk-bg-primary);
     }
 
     .case-study-grid {

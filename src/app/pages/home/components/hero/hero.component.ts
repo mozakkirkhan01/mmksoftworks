@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { gsap } from 'gsap';
 import { AnimationService } from '../../../../core/services/animation.service';
 import { SmoothScrollService } from '../../../../core/services/smooth-scroll.service';
@@ -21,11 +20,9 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.ctx = this.animationService.createContext(this.heroRef, () => {
-      // 1. Initial State
       gsap.set('.hero-reveal', { opacity: 0, y: 35 });
-      gsap.set('.robot-3d-wrapper', { opacity: 0, scale: 0.8, y: 30 });
+      gsap.set('.cyber-robot-wrapper', { opacity: 0, scale: 0.8, y: 40 });
 
-      // 2. Timeline Reveal Sequence
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       tl.to('.hero-reveal', {
@@ -34,22 +31,26 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
         duration: 0.9,
         stagger: 0.15
       })
-      .to('.robot-3d-wrapper', {
+      .to('.cyber-robot-wrapper', {
         opacity: 1,
         scale: 1,
         y: 0,
         duration: 1.1,
-        ease: 'back.out(1.4)'
+        ease: 'back.out(1.5)'
       }, '-=0.5');
 
-      // Continuous ambient breathing float
-      gsap.to('.robot-body-container', {
-        y: '+=10',
-        duration: 3,
+      // Floating float levitation animation
+      gsap.to('.cyber-bot', {
+        y: '+=12',
+        duration: 2.8,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
       });
+
+      // Levitating shoulder pods animation
+      gsap.to('.left-pod', { y: '-=8', duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+      gsap.to('.right-pod', { y: '+=8', duration: 2.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 0.3 });
     });
   }
 
@@ -59,28 +60,35 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
     const relX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const relY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-    // 1. Rotate Robot Head in 3D Space
-    gsap.to('.robot-head', {
-      rotationY: relX * 32,
-      rotationX: -relY * 22,
-      rotationZ: relX * 5,
-      duration: 0.4,
+    // 3D Head Tilt Motion
+    gsap.to('.bot-head', {
+      rotationY: relX * 36,
+      rotationX: -relY * 26,
+      rotationZ: relX * 6,
+      duration: 0.35,
       ease: 'power2.out'
     });
 
-    // 2. Move Robot Pupils (Eyes tracking cursor)
-    gsap.to('.eye-pupil', {
-      x: relX * 14,
-      y: relY * 10,
-      duration: 0.25,
+    // Eye Pupils Tracking Cursor Position
+    gsap.to('.pupil-iris', {
+      x: relX * 16,
+      y: relY * 12,
+      duration: 0.2,
       ease: 'power2.out'
     });
 
-    // 3. Subtle Chest Reactor Glow Response
-    gsap.to('.arc-reactor', {
-      x: relX * 8,
-      y: relY * 5,
-      duration: 0.5,
+    // Shoulder Pods Reaction
+    gsap.to('.left-pod', {
+      x: relX * -10,
+      y: relY * -8,
+      duration: 0.45,
+      ease: 'power2.out'
+    });
+
+    gsap.to('.right-pod', {
+      x: relX * 10,
+      y: relY * 8,
+      duration: 0.45,
       ease: 'power2.out'
     });
   }

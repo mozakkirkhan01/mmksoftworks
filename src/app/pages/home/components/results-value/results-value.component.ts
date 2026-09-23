@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
   `,
   styles: [`
     .value-section {
-      background-color: #04111d;
+      background-color: var(--mmk-bg-primary);
     }
 
     .value-header {
