@@ -48,61 +48,73 @@
 
         <!-- 3D Interactive Robot Box -->
         <div class="robot-3d-box" [class.dancing]="isDancing()">
-          <!-- Base Robot Body -->
-          <img src="assets/robot-body.png" alt="MMK AI 3D Robot" class="robot-image" />
+          
+          <!-- Real-Time WebGL Three.js Canvas Rendering Rigged GLB Model -->
+          <canvas #robotCanvas 
+                  class="robot-webgl-canvas" 
+                  [class.canvas-hidden]="!isGLBViewActive()"
+                  (click)="onCanvasClick($event)"
+                  title="Click me to interact with the 3D Robot!">
+          </canvas>
 
-          <!-- Articulated Interactive Waving Left Hand -->
-          <div class="robot-hand hand-left" 
-               (click)="onHandClick('left', $event)" 
-               title="Click my hand to wave! 👋">
-            <img src="assets/robot-hand-left.png" alt="Robot Hand" class="hand-img" />
-            <span class="interactive-hint-dot hand-dot"></span>
-          </div>
+          <!-- Earlier Beloved 3D Interactive Character Layers (Active in Classic Mode) -->
+          <div class="classic-robot-wrapper" [class.robot-hidden]="isGLBViewActive()">
+            <!-- Base Robot Body -->
+            <img src="assets/robot-body.png" alt="MMK AI 3D Robot" class="robot-image" />
 
-          <!-- Interactive Right Hand Click Target -->
-          <div class="robot-hand-target hand-right" 
-               (click)="onHandClick('right', $event)" 
-               title="Click my hand to wave! 👋">
-            <span class="interactive-hint-dot hand-dot"></span>
-          </div>
-
-          <!-- Interactive Visor Face & Eye Overlays -->
-          <div class="visor-interactive-overlay">
-            <!-- Left Eye (Clickable) -->
-            <div class="eye-glow eye-left" 
-                 (click)="onEyeClick($event)" 
-                 title="Click my eyes to blink! 😉">
-              <span class="pupil-dot"></span>
+            <!-- Articulated Interactive Waving Left Hand -->
+            <div class="robot-hand hand-left" 
+                 (click)="onHandClick('left', $event)" 
+                 title="Click my hand to wave! 👋">
+              <img src="assets/robot-hand-left.png" alt="Robot Hand" class="hand-img" />
+              <span class="interactive-hint-dot hand-dot"></span>
             </div>
 
-            <!-- Right Eye (Clickable) -->
-            <div class="eye-glow eye-right" 
-                 (click)="onEyeClick($event)" 
-                 title="Click my eyes to blink! 😉">
-              <span class="pupil-dot"></span>
+            <!-- Interactive Right Hand Click Target -->
+            <div class="robot-hand-target hand-right" 
+                 (click)="onHandClick('right', $event)" 
+                 title="Click my hand to wave! 👋">
+              <span class="interactive-hint-dot hand-dot"></span>
             </div>
 
-            <!-- Visor Whole-Face Click Hotspot -->
-            <div class="visor-click-target" 
-                 (click)="onEyeClick($event)" 
-                 title="Click my eyes to blink! 😉">
+            <!-- Interactive Visor Face & Eye Overlays -->
+            <div class="visor-interactive-overlay">
+              <!-- Left Eye (Clickable) -->
+              <div class="eye-glow eye-left" 
+                   (click)="onEyeClick($event)" 
+                   title="Click my eyes to blink! 😉">
+                <span class="pupil-dot"></span>
+              </div>
+
+              <!-- Right Eye (Clickable) -->
+              <div class="eye-glow eye-right" 
+                   (click)="onEyeClick($event)" 
+                   title="Click my eyes to blink! 😉">
+                <span class="pupil-dot"></span>
+              </div>
+
+              <!-- Visor Whole-Face Click Hotspot -->
+              <div class="visor-click-target" 
+                   (click)="onEyeClick($event)" 
+                   title="Click my eyes to blink! 😉">
+              </div>
+
+              <!-- Cyan Luminous Smile Arc -->
+              <div class="smile-glow"></div>
             </div>
 
-            <!-- Cyan Luminous Smile Arc -->
-            <div class="smile-glow"></div>
-          </div>
+            <!-- Interactive Stomach / Belly Click Target -->
+            <div class="stomach-interactive-target" 
+                 (click)="onStomachClick($event)" 
+                 title="Tickle my stomach to make me dance! 🕺">
+              <span class="stomach-pulse-ring"></span>
+              <span class="stomach-hint-label">Tickle me!</span>
+            </div>
 
-          <!-- Interactive Stomach / Belly Click Target -->
-          <div class="stomach-interactive-target" 
-               (click)="onStomachClick($event)" 
-               title="Tickle my stomach to make me dance! 🕺">
-            <span class="stomach-pulse-ring"></span>
-            <span class="stomach-hint-label">Tickle me!</span>
-          </div>
-
-          <!-- Pulsing Chest Arc Reactor Core -->
-          <div class="chest-reactor-glow" [class.turbo-pulse]="isDancing()">
-            <div class="reactor-pulse"></div>
+            <!-- Pulsing Chest Arc Reactor Core -->
+            <div class="chest-reactor-glow" [class.turbo-pulse]="isDancing()">
+              <div class="reactor-pulse"></div>
+            </div>
           </div>
 
           <!-- Interactive Welcome Speech Pill -->
@@ -124,6 +136,10 @@
             <button class="action-badge" (click)="onStomachClick($event)" title="Click to dance">
               <span class="badge-icon">🕺</span>
               <span class="badge-label">Dance</span>
+            </button>
+            <button class="action-badge badge-mode-toggle" (click)="toggleGLBMode($event)" [title]="isGLBViewActive() ? 'Switch to Classic Mode' : 'Switch to 3D GLB Mode'">
+              <span class="badge-icon">{{ isGLBViewActive() ? '✨' : '🌐' }}</span>
+              <span class="badge-label">{{ isGLBViewActive() ? 'Classic' : '3D GLB' }}</span>
             </button>
           </div>
         </div>
