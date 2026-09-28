@@ -1,4 +1,4 @@
-import { Component, HostListener, signal, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, inject, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SmoothScrollService } from '../../../core/services/smooth-scroll.service';
@@ -14,8 +14,9 @@ import { SERVICES_DATA } from '../../data/services.data';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   private smoothScroll = inject(SmoothScrollService);
+  private ngZone = inject(NgZone);
   themeService = inject(ThemeService);
   
   isScrolled = signal(false);
@@ -26,9 +27,29 @@ export class NavbarComponent {
   industries = INDUSTRIES_DATA;
   services = SERVICES_DATA;
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.isScrolled.set(window.scrollY > 30);
+  private scrollHandler?: () => void;
+
+  ngOnInit(): void {
+    if (typeof window === 'undefined') return;
+
+    this.scrollHandler = () => {
+      const scrolled = window.scrollY > 30;
+      if (scrolled !== this.isScrolled()) {
+        this.ngZone.run(() => {
+          this.isScrolled.set(scrolled);
+        });
+      }
+    };
+
+    this.ngZone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.scrollHandler!, { passive: true });
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.scrollHandler && typeof window !== 'undefined') {
+      window.removeEventListener('scroll', this.scrollHandler);
+    }
   }
 
   toggleTheme() {

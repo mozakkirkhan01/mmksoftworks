@@ -1,4 +1,4 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, inject, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="cursor-dot" [style.transform]="'translate3d(' + posX() + 'px, ' + posY() + 'px, 0)'" [class.hovered]="isHovered()"></div>
-    <div class="cursor-ring" [style.transform]="'translate3d(' + posX() + 'px, ' + posY() + 'px, 0)'" [class.hovered]="isHovered()"></div>
+    <div #cursorDot class="cursor-dot"></div>
+    <div #cursorRing class="cursor-ring"></div>
   `,
   styles: [`
     :host {
@@ -32,8 +32,9 @@ import { CommonModule } from '@angular/common';
       top: -4px;
       left: -4px;
       pointer-events: none;
-      transition: transform 0.05s linear;
       box-shadow: 0 0 10px var(--mmk-cyan);
+      will-change: transform;
+      transform: translate3d(-100px, -100px, 0);
     }
 
     .cursor-ring {
@@ -45,7 +46,9 @@ import { CommonModule } from '@angular/common';
       top: -18px;
       left: -18px;
       pointer-events: none;
-      transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      will-change: transform;
+      transform: translate3d(-100px, -100px, 0);
 
       &.hovered {
         width: 52px;
@@ -58,25 +61,68 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class CustomCursorComponent {
-  posX = signal(-100);
-  posY = signal(-100);
-  isHovered = signal(false);
+export class CustomCursorComponent implements OnInit, OnDestroy {
+  @ViewChild('cursorDot', { static: true }) cursorDotRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('cursorRing', { static: true }) cursorRingRef!: ElementRef<HTMLDivElement>;
 
-  @HostListener('window:mousemove', ['$event'])
-  onMouseMove(e: MouseEvent) {
-    this.posX.set(e.clientX);
-    this.posY.set(e.clientY);
+  private ngZone = inject(NgZone);
+  private mouseMoveHandler?: (e: MouseEvent) => void;
+  private rafId?: number;
+  private mouseX = -100;
+  private mouseY = -100;
+  private ringX = -100;
+  private ringY = -100;
 
-    const target = e.target as HTMLElement;
-    const isInteractive = target && (
-      target.tagName === 'A' ||
-      target.tagName === 'BUTTON' ||
-      target.closest('a') !== null ||
-      target.closest('button') !== null ||
-      target.classList.contains('interactive')
-    );
+  ngOnInit(): void {
+    if (typeof window === 'undefined') return;
 
-    this.isHovered.set(!!isInteractive);
+    this.ngZone.runOutsideAngular(() => {
+      this.mouseMoveHandler = (e: MouseEvent) => {
+        this.mouseX = e.clientX;
+        this.mouseY = e.clientY;
+
+        const target = e.target as HTMLElement | null;
+        const isInteractive = !!target && (
+          target.tagName === 'A' ||
+          target.tagName === 'BUTTON' ||
+          target.closest('a') !== null ||
+          target.closest('button') !== null ||
+          target.classList.contains('interactive')
+        );
+
+        if (this.cursorRingRef?.nativeElement) {
+          this.cursorRingRef.nativeElement.classList.toggle('hovered', isInteractive);
+        }
+      };
+
+      window.addEventListener('mousemove', this.mouseMoveHandler, { passive: true });
+
+      const updateCursor = () => {
+        this.ringX += (this.mouseX - this.ringX) * 0.28;
+        this.ringY += (this.mouseY - this.ringY) * 0.28;
+
+        if (this.cursorDotRef?.nativeElement) {
+          this.cursorDotRef.nativeElement.style.transform = `translate3d(${this.mouseX}px, ${this.mouseY}px, 0)`;
+        }
+        if (this.cursorRingRef?.nativeElement) {
+          this.cursorRingRef.nativeElement.style.transform = `translate3d(${this.ringX}px, ${this.ringY}px, 0)`;
+        }
+
+        this.rafId = requestAnimationFrame(updateCursor);
+      };
+
+      this.rafId = requestAnimationFrame(updateCursor);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (typeof window !== 'undefined') {
+      if (this.mouseMoveHandler) {
+        window.removeEventListener('mousemove', this.mouseMoveHandler);
+      }
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+      }
+    }
   }
 }

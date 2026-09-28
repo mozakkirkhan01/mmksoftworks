@@ -8,11 +8,10 @@
 }
 
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
   background-color: var(--mmk-bg-primary);
   color: var(--mmk-text-main);
-  overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -23,13 +22,14 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Lenis Smooth Scroll Styles */
-html.lenis, html.lenis body {
+/* Modern Lenis Smooth Scroll Styles */
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -42,10 +42,10 @@ html.lenis, html.lenis body {
 }
 
 .lenis.lenis-stopped {
-  overflow: hidden;
+  overflow: clip;
 }
 
-.lenis.lenis-scrolling iframe {
+.lenis.lenis-smooth iframe {
   pointer-events: none;
 }
 
