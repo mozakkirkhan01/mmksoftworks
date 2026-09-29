@@ -28,15 +28,16 @@ export class SmoothScrollService {
     gsap.registerPlugin(ScrollTrigger);
 
     this.ngZone.runOutsideAngular(() => {
+      // Butter-smooth lerp physics: instantaneous response + silky momentum glide
       this.lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        lerp: 0.08,             // Damped physics interpolation for buttery glide
+        wheelMultiplier: 1.15,   // Responsive input tracking without lag
+        touchMultiplier: 1.5,    // Smooth touch gesture handling
+        smoothWheel: true,       // Momentum scroll on mouse wheels
+        syncTouch: false,        // Let touch devices use native 120Hz smooth scrolling
         orientation: 'vertical',
         gestureOrientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 1.0,
-        touchMultiplier: 1.5,
-        infinite: false
+        autoRaf: false
       });
 
       // Synchronize Lenis scroll with GSAP ScrollTrigger
@@ -48,8 +49,12 @@ export class SmoothScrollService {
       };
       gsap.ticker.add(this.tickerCallback);
 
-      // Disable GSAP lag smoothing to avoid jumps during scrolling
-      gsap.ticker.lagSmoothing(0);
+      // Keep default GSAP lag smoothing to cushion frame drops and avoid hitches
+      gsap.ticker.lagSmoothing(500, 33);
+
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
     });
 
     // Reset scroll and refresh ScrollTrigger on navigation

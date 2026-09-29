@@ -64,6 +64,9 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
   private targetRotY = 0;
   private targetRotX = 0;
   private resetSpeechTimer?: any;
+  private heroObserver?: IntersectionObserver;
+  private isHeroVisible = true;
+  private heroMouseMoveHandler?: (e: MouseEvent) => void;
 
   ngAfterViewInit(): void {
     // 1. Angular GSAP Hero Reveal & Classic Interactive Setup
@@ -112,8 +115,85 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
         .to('.eye-glow', { scaleY: 1, duration: 0.12, ease: 'power1.inOut' });
     });
 
-    // 2. Pre-initialize Three.js WebGL GLB Robot in background
+    // 2. Setup IntersectionObserver & outside-zone MouseMove (Eliminates continuous Zone change detection)
+    this.setupHeroPerformanceOptimizations();
+
+    // 3. Pre-initialize Three.js WebGL GLB Robot in background
     this.initThreeRobot();
+  }
+
+  private setupHeroPerformanceOptimizations(): void {
+    if (typeof window === 'undefined' || !this.heroRef) return;
+
+    this.ngZone.runOutsideAngular(() => {
+      // Pause 3D render loop when hero is off-screen
+      if (typeof IntersectionObserver !== 'undefined') {
+        this.heroObserver = new IntersectionObserver(([entry]) => {
+          this.isHeroVisible = entry.isIntersecting;
+        }, { threshold: 0.05 });
+        this.heroObserver.observe(this.heroRef.nativeElement);
+      }
+
+      // Smooth throttled mousemove outside Zone.js
+      let ticking = false;
+      let cachedRect = this.heroRef.nativeElement.getBoundingClientRect();
+      const updateRect = () => {
+        if (this.heroRef) cachedRect = this.heroRef.nativeElement.getBoundingClientRect();
+      };
+      window.addEventListener('resize', updateRect, { passive: true });
+
+      this.heroMouseMoveHandler = (e: MouseEvent) => {
+        if (!this.isHeroVisible || ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          ticking = false;
+          const rect = cachedRect;
+          const relX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+          const relY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+
+          if (!this.isDancing()) {
+            if (!this.isGLBViewActive()) {
+              gsap.to('.robot-3d-box', {
+                rotationY: relX * 22,
+                rotationX: -relY * 16,
+                rotationZ: relX * 4,
+                duration: 0.35,
+                ease: 'power2.out',
+                overwrite: 'auto'
+              });
+
+              gsap.to('.pupil-dot', {
+                x: relX * 7,
+                y: relY * 5,
+                duration: 0.18,
+                ease: 'power2.out',
+                overwrite: 'auto'
+              });
+            } else {
+              this.targetRotY = relX * 0.45;
+              this.targetRotX = -relY * 0.32;
+            }
+          }
+
+          gsap.to('.robot-speech-pill', {
+            x: relX * -8,
+            y: relY * -6,
+            duration: 0.45,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+
+          gsap.to('.holo-pedestal', {
+            x: relX * 10,
+            duration: 0.4,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+        });
+      };
+
+      this.heroRef.nativeElement.addEventListener('mousemove', this.heroMouseMoveHandler, { passive: true });
+    });
   }
 
   toggleGLBMode(event?: MouseEvent): void {
@@ -228,6 +308,9 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
   private animate = (): void => {
     this.animFrameId = requestAnimationFrame(this.animate);
 
+    // If hero section is scrolled off-screen, pause Three.js updates to dedicate 100% GPU to buttery scroll
+    if (!this.isHeroVisible) return;
+
     const delta = this.clock.getDelta();
     if (this.mixer) {
       this.mixer.update(delta);
@@ -247,51 +330,6 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
       this.renderer.render(this.scene, this.camera);
     }
   };
-
-  onMouseMove(e: MouseEvent): void {
-    if (!this.heroRef) return;
-    const rect = this.heroRef.nativeElement.getBoundingClientRect();
-    const relX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-    const relY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-
-    // 1. Classic Mode Interactive Tilt & Pupil Tracking
-    if (!this.isDancing()) {
-      if (!this.isGLBViewActive()) {
-        gsap.to('.robot-3d-box', {
-          rotationY: relX * 22,
-          rotationX: -relY * 16,
-          rotationZ: relX * 4,
-          duration: 0.35,
-          ease: 'power2.out'
-        });
-
-        gsap.to('.pupil-dot', {
-          x: relX * 7,
-          y: relY * 5,
-          duration: 0.18,
-          ease: 'power2.out'
-        });
-      } else {
-        // 3D GLB Target Rotation
-        this.targetRotY = relX * 0.45;
-        this.targetRotX = -relY * 0.32;
-      }
-    }
-
-    // 2. Parallax Speech Pill & Pedestal
-    gsap.to('.robot-speech-pill', {
-      x: relX * -8,
-      y: relY * -6,
-      duration: 0.45,
-      ease: 'power2.out'
-    });
-
-    gsap.to('.holo-pedestal', {
-      x: relX * 10,
-      duration: 0.4,
-      ease: 'power2.out'
-    });
-  }
 
   private play3DAction(name: string, loopOnce = true, onFinish?: () => void): void {
     if (!this.mixer || !this.actions[name]) return;
@@ -588,6 +626,12 @@ export class HomeHeroComponent implements AfterViewInit, OnDestroy {
     }
     if (this.resetSpeechTimer) {
       clearTimeout(this.resetSpeechTimer);
+    }
+    if (this.heroObserver) {
+      this.heroObserver.disconnect();
+    }
+    if (this.heroMouseMoveHandler && this.heroRef) {
+      this.heroRef.nativeElement.removeEventListener('mousemove', this.heroMouseMoveHandler);
     }
     window.removeEventListener('resize', this.onResize);
     this.renderer?.dispose();

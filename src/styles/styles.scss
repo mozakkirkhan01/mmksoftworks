@@ -12,7 +12,6 @@ html {
   background-color: var(--mmk-bg-primary);
   color: var(--mmk-text-main);
   overflow-x: clip;
-  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body {
@@ -24,7 +23,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   position: relative;
-  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Modern Lenis Smooth Scroll Styles */
@@ -59,14 +57,13 @@ html.lenis body {
   padding-right: 1.5rem;
 }
 
-/* Glassmorphism & Cards */
+/* Glassmorphism & Cards (GPU Accelerated) */
 .mmk-glass-card {
   background: var(--mmk-card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--mmk-card-border);
   border-radius: 16px;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+  transform: translateZ(0);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     border-color: rgba(25, 211, 255, 0.4);
