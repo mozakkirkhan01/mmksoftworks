@@ -26,13 +26,15 @@
 }
 
 .workflow-card {
-  background: rgba(7, 24, 39, 0.65);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--mmk-card-bg);
+  border: 1px solid var(--mmk-card-border);
   border-radius: 20px;
   padding: 2.5rem;
   position: relative;
-  transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   .card-badge {
     display: inline-block;
@@ -57,12 +59,13 @@
   }
 
   &.workflow-manual {
-    border-color: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.25);
+    opacity: 0.9;
   }
 
   &.workflow-mmk {
-    border-color: rgba(25, 211, 255, 0.3);
-    box-shadow: 0 0 30px rgba(25, 211, 255, 0.1);
+    border-color: rgba(25, 211, 255, 0.35);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2), 0 0 30px rgba(25, 211, 255, 0.12);
   }
 }
 
@@ -150,10 +153,75 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   width: 200px;
   height: 200px;
   background: radial-gradient(circle, rgba(25, 211, 255, 0.2) 0%, transparent 70%);
   pointer-events: none;
   opacity: 0.5;
+  will-change: transform, opacity;
+}
+
+/* Light Theme Overrides */
+:host-context(.mmk-light-theme) {
+  .workflow-card {
+    background: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+
+    &.workflow-manual {
+      border-color: rgba(239, 68, 68, 0.25);
+      background: #ffffff;
+      opacity: 0.92;
+    }
+
+    &.workflow-mmk {
+      border-color: rgba(22, 139, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(22, 139, 255, 0.08);
+      background: #ffffff;
+    }
+  }
+
+  .stage-item {
+    background: rgba(7, 24, 39, 0.025);
+    border-color: rgba(7, 24, 39, 0.07);
+
+    .num {
+      color: #0284c7;
+    }
+
+    .name {
+      color: #071827;
+    }
+
+    .sub {
+      color: #64748b;
+    }
+
+    &.brand-item {
+      background: linear-gradient(135deg, rgba(22, 139, 255, 0.1) 0%, rgba(25, 211, 255, 0.1) 100%);
+      border-color: #0284c7;
+
+      .name {
+        color: #0284c7;
+      }
+    }
+
+    &.highlight-negative {
+      background: rgba(239, 68, 68, 0.07);
+      border-color: rgba(239, 68, 68, 0.2);
+
+      .name {
+        color: #dc2626;
+      }
+    }
+
+    &.highlight-positive {
+      background: linear-gradient(135deg, rgba(32, 214, 181, 0.12) 0%, rgba(25, 211, 255, 0.12) 100%);
+      border-color: #0d9488;
+
+      .name {
+        color: #0f766e;
+      }
+    }
+  }
 }

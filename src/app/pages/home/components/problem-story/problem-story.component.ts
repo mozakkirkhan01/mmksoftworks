@@ -21,18 +21,55 @@ export class ProblemStoryComponent implements AfterViewInit, OnDestroy {
     this.ctx = this.animationService.createContext(this.sectionRef, () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: this.sectionRef.nativeElement,
-          start: 'top 70%',
-          end: 'bottom 40%',
-          scrub: 1
+      gsap.fromTo('.workflow-manual',
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: 'power2.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: this.sectionRef.nativeElement,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
         }
-      });
+      );
 
-      tl.to('.workflow-manual', { opacity: 0.2, scale: 0.97, duration: 0.5 })
-        .to('.transformation-glow', { opacity: 1, scale: 1.1, duration: 0.5 }, '-=0.3')
-        .to('.workflow-mmk', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3');
+      gsap.fromTo('.workflow-mmk',
+        { opacity: 0, y: 45 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          delay: 0.12,
+          ease: 'power2.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: this.sectionRef.nativeElement,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+
+      gsap.fromTo('.transformation-glow',
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 0.6,
+          scale: 1,
+          duration: 0.6,
+          delay: 0.15,
+          ease: 'power2.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: this.sectionRef.nativeElement,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
     });
   }
 
