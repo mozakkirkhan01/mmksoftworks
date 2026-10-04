@@ -12,6 +12,8 @@ html {
   background-color: var(--mmk-bg-primary);
   color: var(--mmk-text-main);
   overflow-x: clip;
+  overscroll-behavior-y: none;
+  scroll-behavior: auto !important;
 }
 
 body {
@@ -22,6 +24,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
+  overscroll-behavior-y: none;
   position: relative;
 }
 
@@ -63,7 +66,7 @@ html.lenis body {
   border: 1px solid var(--mmk-card-border);
   border-radius: 16px;
   transform: translateZ(0);
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     border-color: rgba(25, 211, 255, 0.4);
@@ -89,9 +92,8 @@ html.lenis body {
 /* Reduced Motion Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
     scroll-behavior: auto !important;
   }
 }

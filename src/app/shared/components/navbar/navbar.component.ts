@@ -33,7 +33,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (typeof window === 'undefined') return;
 
     this.scrollHandler = () => {
-      const scrolled = window.scrollY > 30;
+      // Separate enter/exit thresholds avoid toggling on tiny scroll reversals.
+      const scrolled = this.isScrolled() ? window.scrollY > 8 : window.scrollY > 48;
       if (scrolled !== this.isScrolled()) {
         this.ngZone.run(() => {
           this.isScrolled.set(scrolled);
@@ -43,6 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.ngZone.runOutsideAngular(() => {
       window.addEventListener('scroll', this.scrollHandler!, { passive: true });
+      this.scrollHandler!();
     });
   }
 

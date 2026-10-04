@@ -1,6 +1,7 @@
 <header class="mmk-navbar-header" [class.scrolled]="isScrolled()">
+  <div class="mmk-header-bars">
   <!-- Top Utility Bar (Dual Bar Tier 1) -->
-  <div class="mmk-top-bar">
+  <div class="mmk-top-bar" [attr.inert]="isScrolled() ? '' : null" [attr.aria-hidden]="isScrolled() ? 'true' : null">
     <div class="mmk-container top-bar-content">
       <div class="top-info-left">
         <a href="tel:8804791446" class="top-info-item">
@@ -160,6 +161,8 @@
         </div>
       </nav>
     </div>
+  </div>
+
   </div>
 
   <!-- Mobile Drawer -->

@@ -359,9 +359,13 @@
   }
 }
 
+.hero-paused *, .hero-paused *::before, .hero-paused *::after {
+  animation-play-state: paused !important;
+}
+
 @keyframes hintPulse {
   0%, 100% { transform: scale(0.9); opacity: 0.6; }
-  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #00E5FF; }
+  50% { transform: scale(1.3); opacity: 1; }
 }
 
 /* Interactive Visor Face Elements */
@@ -523,18 +527,16 @@
   0%, 100% {
     transform: scale(0.9);
     opacity: 0.85;
-    box-shadow: 0 0 12px #00E5FF, 0 0 20px rgba(25, 211, 255, 0.5);
   }
   50% {
     transform: scale(1.2);
     opacity: 1;
-    box-shadow: 0 0 22px #00E5FF, 0 0 35px rgba(25, 211, 255, 0.9);
   }
 }
 
 @keyframes coreTurboPulse {
-  0% { transform: scale(1); box-shadow: 0 0 15px #00E5FF; }
-  100% { transform: scale(1.4); box-shadow: 0 0 35px #00E5FF, 0 0 50px rgba(168, 85, 247, 0.9); }
+  0% { transform: scale(1); opacity: 0.65; }
+  100% { transform: scale(1.4); opacity: 1; }
 }
 
 /* Welcome Speech Pill - Positioned cleanly ABOVE the robot head */
@@ -561,8 +563,8 @@
   color: #f1f5f9;
   z-index: 20;
   white-space: nowrap;
-  animation: floatBubble 3s infinite ease-in-out alternate;
-  transition: all 0.3s ease;
+  // GSAP pointer tracking owns the transform; CSS must not animate it too.
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 
   .speech-status-dot {
     width: 7px;
@@ -687,7 +689,7 @@
   height: 45px;
   pointer-events: none;
   z-index: 1;
-  transition: all 0.4s ease;
+  // Transform and opacity are driven by GSAP.
 
   .holo-ring {
     position: absolute;

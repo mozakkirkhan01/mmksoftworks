@@ -99,17 +99,18 @@ export class WhatWeDoComponent implements AfterViewInit, OnDestroy {
   }
 
   onMouseMove(e: MouseEvent): void {
-    if (!this.ecosystemRef) return;
+    if (!this.ecosystemRef || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const rect = this.ecosystemRef.nativeElement.getBoundingClientRect();
     const relX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const relY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
-    gsap.to('.wwd-ecosystem-visual', {
+    this.ctx?.add(() => gsap.to('.wwd-ecosystem-visual', {
       rotationY: relX * 10,
       rotationX: -relY * 10,
       duration: 0.8,
-      ease: 'power2.out'
-    });
+      ease: 'power2.out',
+      overwrite: 'auto'
+    }));
   }
 
   ngOnInit(): void {

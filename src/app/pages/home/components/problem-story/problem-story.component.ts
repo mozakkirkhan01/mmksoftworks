@@ -32,8 +32,7 @@ export class ProblemStoryComponent implements AfterViewInit, OnDestroy {
 
       tl.to('.workflow-manual', { opacity: 0.2, scale: 0.97, duration: 0.5 })
         .to('.transformation-glow', { opacity: 1, scale: 1.1, duration: 0.5 }, '-=0.3')
-        .to('.workflow-mmk', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3')
-        .to('.connect-line-svg', { strokeDashoffset: 0, duration: 0.8 }, '-=0.6');
+        .to('.workflow-mmk', { opacity: 1, y: 0, duration: 0.8 }, '-=0.3');
     });
   }
 

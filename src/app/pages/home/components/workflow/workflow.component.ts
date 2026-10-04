@@ -30,17 +30,21 @@ export class HomeWorkflowComponent implements AfterViewInit, OnDestroy {
     this.ctx = this.animationService.createContext(this.workflowRef, () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.from('.stage-card', {
-        scrollTrigger: {
-          trigger: this.workflowRef.nativeElement,
-          start: 'top 75%',
-          end: 'bottom 40%',
-          scrub: 1
-        },
-        opacity: 0,
-        y: 40,
-        stagger: 0.15
-      });
+      gsap.fromTo('.stage-card', 
+        { opacity: 0, y: 35 },
+        {
+          scrollTrigger: {
+            trigger: this.workflowRef.nativeElement,
+            start: 'top 75%',
+            end: 'bottom 40%',
+            scrub: 1
+          },
+          opacity: 1,
+          y: 0,
+          stagger: 0.15,
+          immediateRender: false
+        }
+      );
     });
   }
 

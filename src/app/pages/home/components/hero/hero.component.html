@@ -1,4 +1,4 @@
-<section #heroRef class="hero-section">
+<section #heroRef class="hero-section" [class.hero-paused]="heroPaused()">
   <div class="hero-bg-glow"></div>
   <div class="mmk-container hero-grid">
     <!-- Left / Center Content -->
@@ -125,21 +125,21 @@
 
           <!-- Interactive Control Action Badges -->
           <div class="robot-action-badges">
-            <button class="action-badge" (click)="onHandClick('left', $event)" title="Click to wave hand">
+            <button class="action-badge" [disabled]="prefersReducedMotion()" (click)="onHandClick('left', $event)" title="Click to wave hand">
               <span class="badge-icon">👋</span>
               <span class="badge-label">Wave</span>
             </button>
-            <button class="action-badge" (click)="onEyeClick($event)" title="Click to blink eyes">
+            <button class="action-badge" [disabled]="prefersReducedMotion()" (click)="onEyeClick($event)" title="Click to blink eyes">
               <span class="badge-icon">😉</span>
               <span class="badge-label">Blink</span>
             </button>
-            <button class="action-badge" (click)="onStomachClick($event)" title="Click to dance">
+            <button class="action-badge" [disabled]="prefersReducedMotion()" (click)="onStomachClick($event)" title="Click to dance">
               <span class="badge-icon">🕺</span>
               <span class="badge-label">Dance</span>
             </button>
-            <button class="action-badge badge-mode-toggle" (click)="toggleGLBMode($event)" [title]="isGLBViewActive() ? 'Switch to Classic Mode' : 'Switch to 3D GLB Mode'">
+            <button class="action-badge badge-mode-toggle" [disabled]="is3DLoading()" [attr.aria-busy]="is3DLoading()" [attr.aria-pressed]="isGLBViewActive()" (click)="toggleGLBMode($event)" [title]="isGLBViewActive() ? 'Switch to Classic Mode' : 'Switch to 3D GLB Mode'">
               <span class="badge-icon">{{ isGLBViewActive() ? '✨' : '🌐' }}</span>
-              <span class="badge-label">{{ isGLBViewActive() ? 'Classic' : '3D GLB' }}</span>
+              <span class="badge-label">{{ is3DLoading() ? 'Loading…' : isGLBViewActive() ? 'Classic' : '3D GLB' }}</span>
             </button>
           </div>
         </div>

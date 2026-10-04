@@ -32,8 +32,8 @@ export class ErpEcosystemComponent implements AfterViewInit, OnDestroy {
       items.forEach((item: any, i: number) => {
         ScrollTrigger.create({
           trigger: item,
-          start: 'top 50%',
-          end: 'bottom 50%',
+          start: 'top 55%',
+          end: 'bottom 45%',
           onEnter: () => this.setActiveIndex(i),
           onEnterBack: () => this.setActiveIndex(i)
         });
@@ -42,7 +42,9 @@ export class ErpEcosystemComponent implements AfterViewInit, OnDestroy {
   }
 
   setActiveIndex(index: number): void {
-    this.activeIndex.set(index);
+    if (this.activeIndex() !== index) {
+      this.activeIndex.set(index);
+    }
   }
 
   ngOnDestroy(): void {

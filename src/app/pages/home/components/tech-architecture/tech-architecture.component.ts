@@ -32,17 +32,21 @@ export class TechArchitectureComponent implements AfterViewInit, OnDestroy {
     this.ctx = this.animationService.createContext(this.techRef, () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.from('.arch-node', {
-        scrollTrigger: {
-          trigger: this.techRef.nativeElement,
-          start: 'top 70%',
-          end: 'bottom 40%',
-          scrub: 1
-        },
-        opacity: 0,
-        scale: 0.85,
-        stagger: 0.1
-      });
+      gsap.fromTo('.arch-node', 
+        { opacity: 0, scale: 0.88 },
+        {
+          scrollTrigger: {
+            trigger: this.techRef.nativeElement,
+            start: 'top 70%',
+            end: 'bottom 40%',
+            scrub: 1
+          },
+          opacity: 1,
+          scale: 1,
+          stagger: 0.1,
+          immediateRender: false
+        }
+      );
     });
   }
 

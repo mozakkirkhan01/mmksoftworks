@@ -1,4 +1,6 @@
 .mmk-navbar-header {
+  --nav-height: 78px;
+  --drawer-top: calc(42px + var(--nav-height));
   position: fixed;
   top: 0;
   left: 0;
@@ -6,7 +8,18 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    --nav-height: 68px;
+  }
+}
+
+.mmk-header-bars {
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.25s ease;
+  will-change: transform;
 }
 
 /* Tier 1: Top Utility Bar */
@@ -16,7 +29,6 @@
   height: 42px;
   display: flex;
   align-items: center;
-  transition: all 0.35s ease;
   overflow: hidden;
 
   .top-bar-content {
@@ -129,36 +141,21 @@
 
 /* Tier 2: Main Glass Navigation Bar */
 .mmk-main-bar {
-  height: 78px;
+  height: var(--nav-height);
   display: flex;
   align-items: center;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  
-  background: rgba(4, 17, 29, 0.65);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  // A stable surface avoids re-rasterizing the scrolling page through a blur.
+  background: #071827;
   border-bottom: 1px solid rgba(25, 211, 255, 0.15);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 
-  @media (max-width: 768px) {
-    height: 68px;
-  }
 }
 
 .mmk-navbar-header.scrolled {
-  .mmk-top-bar {
-    height: 0;
-    opacity: 0;
-    border-bottom: none;
-  }
+  --drawer-top: var(--nav-height);
 
-  .mmk-main-bar {
-    height: 68px;
-    background: rgba(7, 24, 39, 0.88);
-    backdrop-filter: blur(28px) saturate(200%);
-    -webkit-backdrop-filter: blur(28px) saturate(200%);
-    border-bottom: 1px solid rgba(25, 211, 255, 0.25);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(25, 211, 255, 0.1);
+  .mmk-header-bars {
+    transform: translate3d(0, -42px, 0);
   }
 }
 
@@ -174,7 +171,7 @@
   }
 
   .mmk-main-bar {
-    background: rgba(255, 255, 255, 0.75);
+    background: #f5f8fc;
     border-bottom: 1px solid rgba(22, 139, 255, 0.18);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
@@ -210,11 +207,6 @@
     }
   }
 
-  .mmk-navbar-header.scrolled .mmk-main-bar {
-    background: rgba(245, 248, 252, 0.92);
-    border-bottom: 1px solid rgba(22, 139, 255, 0.25);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
 }
 
 .mmk-nav {
@@ -508,7 +500,7 @@
 
 .mobile-drawer {
   position: fixed;
-  top: 90px;
+  top: var(--drawer-top);
   left: 0;
   right: 0;
   bottom: 0;
@@ -521,7 +513,7 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: all 0.35s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
   z-index: 999;
   overflow-y: auto;
 

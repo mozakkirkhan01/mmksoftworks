@@ -105,6 +105,8 @@
 .right-sticky-col {
   position: sticky;
   top: 110px;
+  will-change: transform;
+  transform: translateZ(0);
 
   @media (max-width: 1024px) {
     position: relative;
@@ -114,10 +116,13 @@
 
 .sticky-visual-box {
   padding: 2rem;
-  min-height: 480px;
+  min-height: 520px;
+  height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .visual-header {
@@ -233,18 +238,23 @@
   border-radius: 12px;
   padding: 1.25rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 175px;
 
   h4 {
     font-family: var(--font-heading);
     font-size: 1.05rem;
     color: var(--mmk-white);
     margin-bottom: 0.75rem;
+    min-height: 2.8rem;
+    display: flex;
+    align-items: center;
   }
 
   .benefits-pills {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    min-height: 80px;
 
     .b-pill {
       font-size: 0.8rem;

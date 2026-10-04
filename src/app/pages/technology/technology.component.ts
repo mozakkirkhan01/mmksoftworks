@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { TECH_STACK_DATA } from '../../shared/data/technology.data';
 import { SeoService } from '../../core/services/seo.service';
 
